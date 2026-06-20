@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บทที่ 5 – สรุปผลการปฏิบัติงาน | Smart Exam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sarabun', 'TH Sarabun New', serif;
+    font-size: 16pt;
+    line-height: 2;
+    color: #000;
+    background: #d9d9d9;
+  }
+
+  /* ===================== PAGE ===================== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 10mm auto;
+    background: #fff;
+    padding: 25mm 25mm 25mm 30mm;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    position: relative;
+    page-break-after: always;
+  }
+
+  /* ===================== HEADINGS ===================== */
+  h1.ch-title {
+    font-size: 18pt;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 8mm;
+  }
+  h2.sec {
+    font-size: 16pt;
+    font-weight: 700;
+    margin: 6mm 0 2mm 0;
+    text-indent: 0;
+  }
+  h3.subsec {
+    font-size: 16pt;
+    font-weight: 700;
+    margin: 4mm 0 1mm 10mm;
+  }
+
+  /* ===================== TEXT ===================== */
+  p {
+    font-size: 16pt;
+    text-align: justify;
+    text-indent: 15mm;
+    margin-bottom: 2mm;
+  }
+  p.no-indent { text-indent: 0; }
+
+  ul, ol {
+    margin-left: 20mm;
+    margin-bottom: 2mm;
+  }
+  li { font-size: 16pt; line-height: 1.8; margin-bottom: 1mm; }
+
+  .indent-block {
+    margin-left: 15mm;
+  }
+  .indent-block2 {
+    margin-left: 22mm;
+  }
+
+  /* ===================== TABLE ===================== */
+  .tbl-caption {
+    font-size: 15pt;
+    font-weight: 700;
+    text-align: center;
+    margin: 4mm 0 2mm 0;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14pt;
+    margin-bottom: 4mm;
+  }
+  table.data-table th {
+    background: #1a3c72;
+    color: #fff;
+    padding: 2mm 3mm;
+    text-align: center;
+    border: 1px solid #1a3c72;
+    font-size: 14pt;
+    line-height: 1.4;
+  }
+  table.data-table td {
+    padding: 1.5mm 3mm;
+    border: 1px solid #999;
+    vertical-align: middle;
+    line-height: 1.6;
+  }
+  table.data-table tr:nth-child(even) td { background: #f2f2f2; }
+  .text-center { text-align: center; }
+  .text-bold { font-weight: 700; }
+
+  /* ===================== SATISFACTION TABLE ===================== */
+  table.sat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13pt;
+    margin-bottom: 4mm;
+  }
+  table.sat-table th {
+    background: #1a3c72;
+    color: #fff;
+    padding: 2mm 3mm;
+    text-align: center;
+    border: 1px solid #1a3c72;
+    line-height: 1.4;
+  }
+  table.sat-table td {
+    padding: 1.5mm 3mm;
+    border: 1px solid #aaa;
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+  table.sat-table tr:nth-child(even) td { background: #f5f5f5; }
+  table.sat-table .section-head td {
+    background: #dbe5f1;
+    font-weight: 700;
+  }
+
+  /* ===================== CHART BAR ===================== */
+  .chart-wrapper {
+    margin: 4mm 0;
+    page-break-inside: avoid;
+  }
+  .chart-title {
+    font-size: 14pt;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3mm;
+  }
+  .bar-chart {
+    padding: 4mm 6mm 6mm 6mm;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 55mm;
+    position: relative;
+  }
+  .bar-group {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    height: 40mm;
+    border-bottom: 2px solid #333;
+    border-left: 2px solid #333;
+    padding: 0 4mm 0 2mm;
+    position: relative;
+    gap: 4mm;
+  }
+  /* Y-axis labels */
+  .y-labels {
+    position: absolute;
+    left: -8mm;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: #555;
+  }
+  /* Grid lines */
+  .bar-group::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      to top,
+      transparent,
+      transparent calc(20% - 1px),
+      #e0e0e0 calc(20% - 1px),
+      #e0e0e0 20%
+    );
+    pointer-events: none;
+  }
+  .bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    max-width: 18mm;
+    position: relative;
+    z-index: 1;
+  }
+  .bar-fill {
+    width: 70%;
+    background: linear-gradient(to top, #1a3c72, #4472c4);
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    min-height: 2mm;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .bar-val {
+    font-size: 9pt;
+    font-weight: 700;
+    color: #1a3c72;
+    margin-top: 1mm;
+    white-space: nowrap;
+  }
+  .bar-label {
+    font-size: 8pt;
+    color: #333;
+    text-align: center;
+    margin-top: 1.5mm;
+    line-height: 1.3;
+    max-width: 18mm;
+  }
+  .avg-line {
+    font-size: 12pt;
+    text-align: center;
+    margin-top: 2mm;
+    color: #555;
+  }
+
+  /* ===================== PAGE FOOTER ===================== */
+  .page-num {
+    position: absolute;
+    bottom: 12mm;
+    right: 25mm;
+    font-size: 12pt;
+    color: #555;
+  }
+
+  /* ===================== RESULT BADGE ===================== */
+  .badge-good {
+    display: inline-block;
+    background: #0d6efd;
+    color: #fff;
+    padding: 0 5px;
+    border-radius: 3px;
+    font-size: 13pt;
+  }
+  .badge-great {
+    display: inline-block;
+    background: #198754;
+    color: #fff;
+    padding: 0 5px;
+    border-radius: 3px;
+    font-size: 13pt;
+  }
+
+  /* ===================== PRINT ===================== */
+  @media print {
+    body { background: none; }
+    .page { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     PAGE 1
+     ============================================= -->
+<div class="page">
+
+  <h1 class="ch-title">บทที่ 5</h1>
+  <h1 class="ch-title" style="margin-bottom:6mm;">สรุปผลการปฏิบัติงาน</h1>
+
+  <p>หลังจากพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (A Comprehensive Intelligent Examination Management System) หรือ Smart Exam เสร็จสิ้นแล้ว และได้ทดสอบการทำงานของระบบจากการประเมินความพึงพอใจในการใช้งาน ปัญหาที่พบ และข้อเสนอแนะในการพัฒนาระบบต่อในอนาคตได้ ดังนี้</p>
+
+  <!-- ============ 1. ผลการปฏิบัติงาน ============ -->
+  <h2 class="sec">1.&nbsp;&nbsp;ผลการปฏิบัติงาน</h2>
+
+  <p>การพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) ได้จำแนกผลการดำเนินงานออกเป็น 2 ส่วน โดยมีรายละเอียดต่อไปนี้</p>
+
+  <!-- 1.1 ผลการพัฒนาระบบ -->
+  <h3 class="subsec">1)&nbsp;&nbsp;ผลการพัฒนาระบบ</h3>
+
+  <p>ผลการพัฒนาระบบสามารถแบ่งออกเป็น 2 ส่วน ได้แก่ ขอบเขตของระบบงานและขอบเขตของผู้ใช้งาน โดยมีรายละเอียดดังต่อไปนี้ ขอบเขตของระบบงานที่สามารถดำเนินการได้ครอบคลุมมีดังนี้</p>
+
+  <p class="no-indent" style="text-align:center; font-weight:700; margin:3mm 0 1mm 0;">ผลการดำเนินงาน</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width:70%;">ขอบเขต</th>
+        <th style="width:30%;">ความสำเร็จ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 1 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">1. การจัดการสิทธิ์ผู้ใช้งาน</p>
+          <ul style="margin-left:8mm; margin-top:1mm;">
+            <li><strong>ผู้ดูแลระบบ (Admin)</strong> ระบบสามารถจัดการบัญชีผู้ใช้ทั้งหมด กำหนดสิทธิ์บทบาท ตรวจสอบสถิติภาพรวม และแจ้งเตือนกรณีทุจริตการสอบได้</li>
+            <li><strong>อาจารย์ (Teacher)</strong> ระบบสามารถสร้างและจัดการชุดข้อสอบ วิเคราะห์ผลการสอบ และตรวจข้ออัตนัยได้</li>
+            <li><strong>นักศึกษา (Student)</strong> ระบบสามารถเข้าสอบด้วย PIN กรอกคำตอบ และดูผลการสอบของตนเองได้</li>
+          </ul>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+      <!-- 2 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">2. ส่วนของการจัดการข้อมูล</p>
+          <p class="no-indent" style="margin:0;">ได้แก่ ข้อมูลผู้ใช้งาน (users) ข้อมูลรายวิชา (courses) ข้อมูลการมอบหมายอาจารย์ผู้สอน (teacher_courses) ข้อมูลชุดข้อสอบ (exams) ข้อมูลคลังโจทย์ (questions) ข้อมูลโจทย์ในชุดสอบ (exam_questions) ข้อมูลผลการสอบ (student_results) และข้อมูลคำตอบนักศึกษา (student_answers)</p>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+      <!-- 3 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">3. ส่วนลงชื่อเข้าใช้งานระบบ</p>
+          <ul style="margin-left:8mm; margin-top:1mm;">
+            <li><strong>ผู้ใช้งานทุกบทบาท</strong> เข้าสู่ระบบด้วย Username/Password ผ่านระบบ Session Authentication ที่ตรวจสอบ Role และสถานะบัญชีก่อนอนุญาต</li>
+            <li><strong>นักศึกษา</strong> เข้าสู่ห้องสอบเพิ่มเติมด้วยรหัส PIN 6 หลักที่อาจารย์กำหนด</li>
+          </ul>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+      <!-- 4 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">4. ส่วนของการจัดการการสอบ</p>
+          <p class="no-indent" style="font-weight:700; margin:1mm 0 0 5mm;">4.1) สิทธิ์ผู้ดูแลระบบ (Admin)</p>
+          <ul style="margin-left:8mm;">
+            <li><strong>ฟังก์ชันจัดการผู้ใช้งาน</strong> พัฒนาระบบสำหรับเพิ่ม แก้ไข ระงับบัญชี นำเข้า/ส่งออกข้อมูลผ่าน CSV และ Reset รหัสผ่านแบบ AJAX</li>
+            <li><strong>ฟังก์ชันจัดการรายวิชาและผู้สอน</strong> พัฒนาระบบเพิ่มรายวิชา กำหนดอาจารย์ผู้สอนประจำวิชาผ่าน Multi-select และนำเข้า/ส่งออก CSV</li>
+            <li><strong>แดชบอร์ดสถิติ</strong> พัฒนาหน้าจอแสดงภาพรวมจำนวนนักศึกษา อาจารย์ รายวิชา และแจ้งเตือนทุจริตการสอบ พร้อม Line Chart สถิติ 7 วัน</li>
+          </ul>
+          <p class="no-indent" style="font-weight:700; margin:1mm 0 0 5mm;">4.2) สิทธิ์อาจารย์ผู้สอน (Teacher)</p>
+          <ul style="margin-left:8mm;">
+            <li><strong>ฟังก์ชันสร้างชุดข้อสอบ</strong> พัฒนาระบบสำหรับสร้างการสอบพร้อมกำหนด PIN เวลาสอบ 2 รูปแบบ (ช่วงเวลา/ระยะเวลาอิสระ) ห้องสอบ กลุ่มเรียน และตั้งค่าการสลับข้อสอบ</li>
+            <li><strong>ฟังก์ชันจัดการโจทย์ข้อสอบ</strong> พัฒนาระบบเพิ่มโจทย์ 3 รูปแบบ ได้แก่ ปรนัย ถูก-ผิด และอัตนัย พร้อมระบบดึงโจทย์จากคลังแบบสุ่มและกำหนดจำนวน</li>
+            <li><strong>ฟังก์ชันดูผลและตรวจข้อสอบ</strong> พัฒนาหน้าแสดงผลการสอบ สถิติคะแนน และระบบตรวจให้คะแนนข้ออัตนัยพร้อม Update คะแนนรวมทันที</li>
+            <li><strong>แดชบอร์ดอาจารย์</strong> พัฒนาหน้าหลักแสดงสถิติ Bar Chart คะแนนสูงสุด/เฉลี่ย/ต่ำสุด และตารางรายการส่งข้อสอบล่าสุด</li>
+          </ul>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+      <!-- 5 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">5. ส่วนระบบทำข้อสอบออนไลน์สำหรับนักศึกษา</p>
+          <p class="no-indent" style="margin:0;">ได้แก่ ระบบนาฬิกาจับเวลาแบบ Real-time ระบบส่งข้อสอบอัตโนมัติ (Auto-submit) เมื่อหมดเวลา ระบบ Auto-save คำตอบใน LocalStorage ป้องกันสูญหายเมื่อหน้าเว็บรีเฟรช และระบบตรวจสอบการทำซ้ำป้องกันไม่ให้ทำข้อสอบชุดเดิมมากกว่าหนึ่งครั้ง</p>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+      <!-- 6 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">6. ส่วนการสร้างข้อสอบด้วยปัญญาประดิษฐ์ (AI Generator)</p>
+          <p class="no-indent" style="margin:0;">ฟีเจอร์สร้างโจทย์ข้อสอบปรนัยอัตโนมัติโดย Google Gemini API (gemini-2.5-flash-lite) จากการวิเคราะห์เนื้อหาที่อัปโหลดในรูปแบบ PDF (ผ่าน Smalot PDF Parser) หรือข้อความที่ป้อน พร้อมระบบตรวจสอบและปรับแก้ผ่าน AI ก่อนบันทึกลงระบบ</p>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+      <!-- 7 -->
+      <tr>
+        <td>
+          <p class="no-indent" style="font-weight:700; margin:0;">7. ส่วนการวิเคราะห์คุณภาพข้อสอบเชิงสถิติ (Item Analysis)</p>
+          <p class="no-indent" style="margin:0;">ระบบคำนวณค่าความยาก (p) และค่าอำนาจจำแนก (D) ของข้อสอบปรนัยและถูก-ผิดแต่ละข้อ โดยแบ่งกลุ่มผู้สอบเป็นกลุ่มเก่ง (Upper) และกลุ่มอ่อน (Lower) พร้อมข้อเสนอแนะจากระบบ AI อัตโนมัติ</p>
+        </td>
+        <td class="text-center text-bold">100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-num">5-1</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 2 – ผลการประเมินระบบ (ตาราง 5.1 + 5.2)
+     ============================================= -->
+<div class="page">
+
+  <!-- 1.2 ผลการประเมินระบบ -->
+  <h3 class="subsec">2)&nbsp;&nbsp;ผลการประเมินระบบ</h3>
+
+  <p>การประเมินผลการดำเนินงานของการพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) ได้แบ่งการประเมินออกเป็น 2 ส่วน ดังนี้</p>
+
+  <p><strong>2.1)&nbsp;ผลการประเมินความพึงพอใจโดยอาจารย์ผู้สอน</strong> จำนวน 3 คน สามารถแสดงรายละเอียดของระดับความคิดเห็นด้านต่าง ๆ ได้ดังตารางที่ 5.1</p>
+
+  <p class="tbl-caption">ตารางที่ 5.1&nbsp; ตารางความพึงพอใจระบบของอาจารย์ผู้สอน</p>
+
+  <table class="sat-table">
+    <thead>
+      <tr>
+        <th rowspan="2" style="width:50%;">รายการประเมิน</th>
+        <th colspan="5">ระดับความคิดเห็น</th>
+      </tr>
+      <tr>
+        <th>5<br>(มากที่สุด)</th>
+        <th>4<br>(มาก)</th>
+        <th>3<br>(ปานกลาง)</th>
+        <th>2<br>(พอใช้)</th>
+        <th>1<br>(ปรับปรุง)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="6">1. ด้านการใช้งาน (Usability)</td></tr>
+      <tr>
+        <td>1.1 ความง่ายในการเข้าสู่ระบบและการใช้งานเมนูต่าง ๆ</td>
+        <td class="text-center">67 (2)</td>
+        <td class="text-center">33 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>1.2 ความสะดวกในการสร้างชุดข้อสอบและกำหนดเงื่อนไขการสอบ</td>
+        <td class="text-center">67 (2)</td>
+        <td class="text-center">33 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>1.3 ความสะดวกในการเพิ่ม แก้ไข และจัดการโจทย์ข้อสอบ</td>
+        <td class="text-center">67 (2)</td>
+        <td class="text-center">33 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr class="section-head"><td colspan="6">2. ด้านการทำงานของระบบ (Functionality &amp; AI)</td></tr>
+      <tr>
+        <td>2.1 ความรวดเร็วและแม่นยำในการบันทึกข้อมูลลงฐานข้อมูล</td>
+        <td class="text-center">67 (2)</td>
+        <td class="text-center">33 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>2.2 ประสิทธิภาพของ AI ในการสร้างข้อสอบจากเนื้อหา PDF</td>
+        <td class="text-center">100 (3)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>2.3 ความถูกต้องของการตรวจข้อสอบปรนัยและถูก-ผิดอัตโนมัติ</td>
+        <td class="text-center">100 (3)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>2.4 ความมีประโยชน์ของการวิเคราะห์คุณภาพข้อสอบ (Item Analysis)</td>
+        <td class="text-center">100 (3)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr class="section-head"><td colspan="6">3. ด้านการออกแบบ (Design)</td></tr>
+      <tr>
+        <td>3.1 ความสวยงามและทันสมัยของหน้าจอระบบ</td>
+        <td class="text-center">100 (3)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>3.2 การจัดวางองค์ประกอบและตัวอักษรอ่านง่าย สบายตา</td>
+        <td class="text-center">67 (2)</td>
+        <td class="text-center">33 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr style="background:#e8f0e8;">
+        <td class="text-bold">การประเมินภาพรวมของโครงงาน</td>
+        <td class="text-center text-bold">67 (2)</td>
+        <td class="text-center text-bold">33 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>2.2)&nbsp;ผลการประเมินความพึงพอใจโดยนักศึกษา</strong> จำนวน 10 คน สามารถแสดงรายละเอียดของระดับความคิดเห็นด้านต่าง ๆ ได้ดังตารางที่ 5.2</p>
+
+  <p class="tbl-caption">ตารางที่ 5.2&nbsp; ตารางการประเมินความพึงพอใจของนักศึกษา</p>
+
+  <table class="sat-table">
+    <thead>
+      <tr>
+        <th rowspan="2" style="width:50%;">รายการประเมิน</th>
+        <th colspan="5">ระดับความคิดเห็น</th>
+      </tr>
+      <tr>
+        <th>5<br>(มากที่สุด)</th>
+        <th>4<br>(มาก)</th>
+        <th>3<br>(ปานกลาง)</th>
+        <th>2<br>(พอใช้)</th>
+        <th>1<br>(ปรับปรุง)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="6">1. ด้านการทำงานของระบบ (Functionality)</td></tr>
+      <tr>
+        <td>1.1 ความรวดเร็วในการโหลดข้อสอบและบันทึกคำตอบ</td>
+        <td class="text-center">50 (5)</td>
+        <td class="text-center">40 (4)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>1.2 ความถูกต้องของระบบจับเวลาและส่งข้อสอบอัตโนมัติ</td>
+        <td class="text-center">60 (6)</td>
+        <td class="text-center">30 (3)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr class="section-head"><td colspan="6">2. ด้านการใช้งาน (Usability)</td></tr>
+      <tr>
+        <td>2.1 ความง่ายในการเข้าสู่ระบบและใช้งานได้ทันที</td>
+        <td class="text-center">60 (6)</td>
+        <td class="text-center">30 (3)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>2.2 ความสะดวกในการกรอก PIN และเข้าห้องสอบ</td>
+        <td class="text-center">70 (7)</td>
+        <td class="text-center">20 (2)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>2.3 ความสะดวกในการตอบคำถามและทบทวนคำตอบก่อนส่ง</td>
+        <td class="text-center">50 (5)</td>
+        <td class="text-center">40 (4)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>2.4 การแสดงผลคะแนนและประวัติการสอบทำงานได้ถูกต้อง ไม่สับสน</td>
+        <td class="text-center">60 (6)</td>
+        <td class="text-center">30 (3)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr class="section-head"><td colspan="6">3. ด้านการออกแบบ (Design)</td></tr>
+      <tr>
+        <td>3.1 ความสวยงามและทันสมัยของหน้าจอทำข้อสอบ</td>
+        <td class="text-center">20 (2)</td>
+        <td class="text-center">70 (7)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr>
+        <td>3.2 การจัดวางปุ่มและเมนูต่าง ๆ เข้าใจได้ง่ายโดยไม่ต้องมีคนสอน</td>
+        <td class="text-center">30 (3)</td>
+        <td class="text-center">60 (6)</td>
+        <td class="text-center">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+      <tr style="background:#e8f0e8;">
+        <td class="text-bold">การประเมินภาพรวมของโครงงาน</td>
+        <td class="text-center text-bold">40 (4)</td>
+        <td class="text-center text-bold">50 (5)</td>
+        <td class="text-center text-bold">10 (1)</td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-num">5-2</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 3 – สรุปผลการดำเนินงาน + ตาราง 5.3 (ทดสอบ)
+     ============================================= -->
+<div class="page">
+
+  <!-- ============ 2. สรุปผลการดำเนินงาน ============ -->
+  <h2 class="sec">2.&nbsp;&nbsp;สรุปผลการดำเนินงาน</h2>
+
+  <p>จากผลการพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) สามารถใช้งานได้จริงครอบคลุมตามขอบเขตของโครงงาน โดยมีรายละเอียดดังนี้</p>
+
+  <h3 class="subsec">1)&nbsp;&nbsp;ผลการทดสอบระบบ</h3>
+
+  <p>การทดสอบการทำงานของระบบ Smart Exam ได้ดำเนินการทดสอบฟังก์ชันการทำงานหลัก เพื่อตรวจสอบความถูกต้อง แม่นยำ และประสิทธิภาพในการตอบสนองของระบบในสถานการณ์จำลองต่าง ๆ โดยมุ่งเน้นการทดสอบในส่วนของกระบวนการเข้าสอบ การสร้างข้อสอบด้วย AI การตรวจข้อสอบอัตโนมัติ และระบบ Item Analysis ซึ่งผลการทดสอบสามารถแสดงรายละเอียดได้ดังตารางที่ 5.3</p>
+
+  <p class="tbl-caption">ตารางที่ 5.3&nbsp; ผลการทดสอบฟังก์ชันการทำงานหลักของระบบ</p>
+
+  <table class="data-table" style="font-size:13pt;">
+    <thead>
+      <tr>
+        <th style="width:5%;">ลำดับ</th>
+        <th style="width:22%;">กรณีทดสอบ</th>
+        <th style="width:35%;">ขั้นตอนการทดสอบ</th>
+        <th style="width:28%;">ผลลัพธ์ที่คาดหวัง</th>
+        <th style="width:10%;">ผลการทดสอบ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="text-center">1</td>
+        <td>ทดสอบการเข้าสอบด้วย PIN 6 หลัก</td>
+        <td>1. อาจารย์สร้างชุดข้อสอบพร้อม PIN<br>2. นักศึกษากรอก PIN บนแดชบอร์ด</td>
+        <td>ระบบนำนักศึกษาเข้าสู่หน้าทำข้อสอบทันที พร้อมแสดงนาฬิกาจับเวลา</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">2</td>
+        <td>ทดสอบระบบป้องกันทำข้อสอบซ้ำ</td>
+        <td>1. นักศึกษาส่งข้อสอบแล้ว<br>2. พยายามกรอก PIN เดิมอีกครั้ง</td>
+        <td>ระบบปฏิเสธและแจ้ง "คุณเคยส่งข้อสอบนี้แล้ว"</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">3</td>
+        <td>ทดสอบ Auto-submit เมื่อหมดเวลา</td>
+        <td>1. นักศึกษากำลังทำข้อสอบ<br>2. รอจนนาฬิกานับถึง 0</td>
+        <td>ระบบส่งคำตอบที่มีอยู่ทั้งหมดอัตโนมัติและแจ้งผล</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">4</td>
+        <td>ทดสอบ Auto-save LocalStorage</td>
+        <td>1. นักศึกษาเลือกคำตอบบางข้อ<br>2. รีเฟรชหน้าเว็บ</td>
+        <td>คำตอบที่เลือกไว้กู้คืนอัตโนมัติ นาฬิกานับต่อจากเดิม</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">5</td>
+        <td>ทดสอบการสร้างข้อสอบด้วย AI จาก PDF</td>
+        <td>1. อาจารย์อัปโหลดไฟล์ PDF สื่อการสอน<br>2. กำหนดจำนวนข้อและระดับความยาก<br>3. กด "เริ่มวิเคราะห์"</td>
+        <td>AI สร้างโจทย์ปรนัยภาษาไทยพร้อมเฉลยแสดงในหน้า Preview ภายใน 30 วินาที</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">6</td>
+        <td>ทดสอบการตรวจข้อสอบปรนัยอัตโนมัติ</td>
+        <td>1. นักศึกษาส่งข้อสอบ<br>2. อาจารย์เปิดดูผลการสอบ</td>
+        <td>ระบบคิดคะแนนข้อปรนัยและถูก-ผิดอัตโนมัติ แสดงสีเขียว (ถูก) และสีแดง (ผิด)</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">7</td>
+        <td>ทดสอบ Item Analysis (ค่า p และ D)</td>
+        <td>1. มีนักศึกษาทำข้อสอบอย่างน้อย 2 คน<br>2. อาจารย์คลิก "วิเคราะห์ข้อสอบ"</td>
+        <td>ระบบคำนวณค่าความยาก (p) และค่าอำนาจจำแนก (D) พร้อมข้อเสนอแนะทุกข้อ</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+      <tr>
+        <td class="text-center">8</td>
+        <td>ทดสอบการนำเข้าผู้ใช้ผ่าน CSV</td>
+        <td>1. Admin เตรียมไฟล์ CSV รายชื่อนักศึกษา<br>2. อัปโหลดผ่านหน้าจัดการผู้ใช้</td>
+        <td>ระบบนำเข้าข้อมูลสำเร็จ แสดงจำนวนรายการที่บันทึก และข้ามรายการที่ซ้ำ</td>
+        <td class="text-center">ผ่าน</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-num">5-3</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 4 – ระดับความพึงพอใจอาจารย์ (ตาราง 5.4 + กราฟ)
+     ============================================= -->
+<div class="page">
+
+  <h3 class="subsec">2)&nbsp;&nbsp;การพัฒนาระบบ</h3>
+  <p>ในการพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) สามารถพัฒนาระบบได้ครอบคลุมตามวัตถุประสงค์และขอบเขตของโครงงาน ทั้งในส่วนของระบบสำหรับอาจารย์ผู้สอน ระบบสำหรับผู้ดูแลระบบ และระบบทำข้อสอบออนไลน์สำหรับนักศึกษา</p>
+
+  <h3 class="subsec">3)&nbsp;&nbsp;การประเมินความพึงพอใจ</h3>
+  <p>จากผลการประเมินความพึงพอใจโดยอาจารย์ผู้สอน และนักศึกษา สามารถสรุปผลการประเมินความพึงพอใจโดยรวมอยู่ในระดับ<strong>ดี</strong> มีค่าเฉลี่ยเท่ากับ <strong>4.56</strong> แสดงรายละเอียดได้ดังตารางที่ 5.4 – 5.5</p>
+
+  <p class="tbl-caption">ตารางที่ 5.4&nbsp; ระดับความพึงพอใจของอาจารย์ผู้สอน</p>
+
+  <table class="sat-table">
+    <thead>
+      <tr>
+        <th style="width:52%;">รายการประเมิน</th>
+        <th style="width:14%;">ค่าเฉลี่ย</th>
+        <th style="width:14%;">S.D.</th>
+        <th style="width:20%;">ระดับความพึงพอใจ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">1. ด้านการใช้งาน (Usability)</td></tr>
+      <tr>
+        <td>1.1 ความง่ายในการเข้าสู่ระบบและการใช้งานเมนูต่าง ๆ</td>
+        <td class="text-center">4.67</td>
+        <td class="text-center">0.58</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>1.2 ความสะดวกในการสร้างชุดข้อสอบและกำหนดเงื่อนไขการสอบ</td>
+        <td class="text-center">4.67</td>
+        <td class="text-center">0.58</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>1.3 ความสะดวกในการเพิ่ม แก้ไข และจัดการโจทย์ข้อสอบ</td>
+        <td class="text-center">4.67</td>
+        <td class="text-center">0.58</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr class="section-head"><td colspan="4">2. ด้านการทำงานของระบบ (Functionality &amp; AI)</td></tr>
+      <tr>
+        <td>2.1 ความรวดเร็วและแม่นยำในการบันทึกข้อมูลลงฐานข้อมูล</td>
+        <td class="text-center">4.67</td>
+        <td class="text-center">0.58</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>2.2 ประสิทธิภาพของ AI ในการสร้างข้อสอบจากเนื้อหา PDF</td>
+        <td class="text-center">5.00</td>
+        <td class="text-center">0.00</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>2.3 ความถูกต้องของการตรวจข้อสอบปรนัยและถูก-ผิดอัตโนมัติ</td>
+        <td class="text-center">5.00</td>
+        <td class="text-center">0.00</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>2.4 ความมีประโยชน์ของการวิเคราะห์คุณภาพข้อสอบ (Item Analysis)</td>
+        <td class="text-center">5.00</td>
+        <td class="text-center">0.00</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr class="section-head"><td colspan="4">3. ด้านการออกแบบ (Design)</td></tr>
+      <tr>
+        <td>3.1 ความสวยงามและทันสมัยของหน้าจอระบบ</td>
+        <td class="text-center">5.00</td>
+        <td class="text-center">0.00</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>3.2 การจัดวางองค์ประกอบและตัวอักษรอ่านง่าย สบายตา</td>
+        <td class="text-center">4.67</td>
+        <td class="text-center">0.58</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr style="background:#e8f0e8;">
+        <td class="text-bold">การประเมินภาพรวมของโครงงาน</td>
+        <td class="text-center text-bold">4.67</td>
+        <td class="text-center text-bold">0.58</td>
+        <td class="text-center text-bold">ดีมาก</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- CHART – อาจารย์ ด้านการใช้งาน -->
+  <p>ผลประเมินความพึงพอใจในด้านการใช้งานอยู่ในระดับ<strong>ดีมาก</strong> คิดเป็นเฉลี่ยเท่ากับ <strong>4.67</strong> สามารถแสดงในรูปแบบแผนภูมิแท่ง ดังแผนภูมิที่ 5.1</p>
+
+  <div class="chart-wrapper">
+    <div class="chart-title">แผนภูมิที่ 5.1&nbsp; ด้านการใช้งานส่วนของอาจารย์ผู้สอน</div>
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.67/5 * 36mm);"><span class="bar-val">4.67</span></div>
+          <div class="bar-label">1.1 เข้าสู่ระบบ<br>/ เมนู</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.67/5 * 36mm);"><span class="bar-val">4.67</span></div>
+          <div class="bar-label">1.2 สร้าง<br>ชุดข้อสอบ</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.67/5 * 36mm);"><span class="bar-val">4.67</span></div>
+          <div class="bar-label">1.3 จัดการ<br>โจทย์</div>
+        </div>
+      </div>
+      <div class="avg-line">ค่าเฉลี่ยรวม = 4.67</div>
+    </div>
+  </div>
+
+  <p>จากแผนภูมิที่ 5.1 แสดงผลการประเมินความพึงพอใจของอาจารย์ผู้สอนที่มีต่อระบบในด้านการใช้งาน โดยภาพรวมพบว่าผู้ใช้งานมีความพึงพอใจอยู่ในระดับ<strong>ดีมาก</strong> ค่าเฉลี่ยรวมเท่ากับ 4.67 และเมื่อพิจารณาเป็นรายข้อพบว่าผู้ใช้งานมีความพึงพอใจในระดับ<strong>ดีมาก</strong>เท่ากันในทุกหัวข้อการประเมิน ซึ่งสามารถสรุปรายละเอียดตามลำดับหัวข้อได้ดังนี้</p>
+  <div class="indent-block">
+    <p class="no-indent">1. อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> ในหัวข้อ "ความง่ายในการเข้าสู่ระบบและการใช้งานเมนูต่าง ๆ" โดยมีค่าเฉลี่ยอยู่ที่ 4.67 (S.D. = 0.58)</p>
+    <p class="no-indent">2. อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> ในหัวข้อ "ความสะดวกในการสร้างชุดข้อสอบและกำหนดเงื่อนไขการสอบ" โดยมีค่าเฉลี่ยอยู่ที่ 4.67 (S.D. = 0.58)</p>
+    <p class="no-indent">3. อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> ในหัวข้อ "ความสะดวกในการเพิ่ม แก้ไข และจัดการโจทย์ข้อสอบ" โดยมีค่าเฉลี่ยอยู่ที่ 4.67 (S.D. = 0.58)</p>
+  </div>
+
+  <div class="page-num">5-4</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 5 – กราฟ Functionality+Design อาจารย์
+     ============================================= -->
+<div class="page">
+
+  <p>ผลประเมินความพึงพอใจในด้านการทำงานของระบบอยู่ในระดับ<strong>ดีมาก</strong> คิดเป็นเฉลี่ยเท่ากับ <strong>4.92</strong> สามารถแสดงในรูปแบบแผนภูมิแท่ง ดังแผนภูมิที่ 5.2</p>
+
+  <div class="chart-wrapper">
+    <div class="chart-title">แผนภูมิที่ 5.2&nbsp; ด้านการทำงานของระบบส่วนของอาจารย์ผู้สอน</div>
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.67/5 * 36mm);"><span class="bar-val">4.67</span></div>
+          <div class="bar-label">2.1 บันทึก<br>ข้อมูล</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(5.00/5 * 36mm);"><span class="bar-val">5.00</span></div>
+          <div class="bar-label">2.2 AI<br>สร้างข้อสอบ</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(5.00/5 * 36mm);"><span class="bar-val">5.00</span></div>
+          <div class="bar-label">2.3 ตรวจ<br>อัตโนมัติ</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(5.00/5 * 36mm);"><span class="bar-val">5.00</span></div>
+          <div class="bar-label">2.4 Item<br>Analysis</div>
+        </div>
+      </div>
+      <div class="avg-line">ค่าเฉลี่ยรวม = 4.92</div>
+    </div>
+  </div>
+
+  <p>จากแผนภูมิที่ 5.2 แสดงแผนภูมิแท่งผลการประเมินความพึงพอใจของอาจารย์ผู้สอนที่มีต่อระบบในด้านการทำงานของระบบ โดยภาพรวมพบว่าผู้ใช้งานมีความพึงพอใจอยู่ในระดับ<strong>ดีมาก</strong> (ค่าเฉลี่ยรวมเท่ากับ 4.92) และเมื่อพิจารณาเป็นรายข้อเรียงลำดับตามค่าเฉลี่ยจากมากไปน้อย สามารถสรุปผลได้ดังนี้</p>
+  <div class="indent-block">
+    <p class="no-indent">1. อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> ในหัวข้อ "ประสิทธิภาพของ AI ในการสร้างข้อสอบจากเนื้อหา PDF", "ความถูกต้องของการตรวจข้อสอบปรนัยและถูก-ผิดอัตโนมัติ" และ "ความมีประโยชน์ของการวิเคราะห์คุณภาพข้อสอบ (Item Analysis)" โดยมีค่าเฉลี่ยสูงสุดเท่ากันที่ 5.00 (S.D. = 0.00)</p>
+    <p class="no-indent">2. ลำดับรองลงมาคือหัวข้อ "ความรวดเร็วและแม่นยำในการบันทึกข้อมูลลงฐานข้อมูล" อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> โดยมีค่าเฉลี่ยอยู่ที่ 4.67 (S.D. = 0.58)</p>
+  </div>
+
+  <p>ผลประเมินความพึงพอใจในด้านการออกแบบอยู่ในระดับ<strong>ดีมาก</strong> คิดเป็นเฉลี่ยเท่ากับ <strong>4.84</strong> สามารถแสดงในรูปแบบแผนภูมิแท่ง ดังแผนภูมิที่ 5.3</p>
+
+  <div class="chart-wrapper">
+    <div class="chart-title">แผนภูมิที่ 5.3&nbsp; ด้านการออกแบบส่วนของอาจารย์ผู้สอน</div>
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(5.00/5 * 36mm);"><span class="bar-val">5.00</span></div>
+          <div class="bar-label">3.1 ความ<br>สวยงาม</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.67/5 * 36mm);"><span class="bar-val">4.67</span></div>
+          <div class="bar-label">3.2 จัดวาง<br>องค์ประกอบ</div>
+        </div>
+      </div>
+      <div class="avg-line">ค่าเฉลี่ยรวม = 4.84</div>
+    </div>
+  </div>
+
+  <p>จากแผนภูมิที่ 5.3 แสดงผลการประเมินความพึงพอใจของอาจารย์ผู้สอนที่มีต่อระบบในด้านการออกแบบ โดยภาพรวมพบว่าผู้ใช้งานมีความพึงพอใจอยู่ในระดับ<strong>ดีมาก</strong> (ค่าเฉลี่ยรวมเท่ากับ 4.84) และเมื่อพิจารณาเป็นรายข้อ สามารถสรุปผลได้ดังนี้</p>
+  <div class="indent-block">
+    <p class="no-indent">1. อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> ในหัวข้อ "ความสวยงามและทันสมัยของหน้าจอระบบ" โดยมีค่าเฉลี่ยสูงสุดที่ 5.00 (S.D. = 0.00)</p>
+    <p class="no-indent">2. ลำดับรองลงมาคือหัวข้อ "การจัดวางองค์ประกอบและตัวอักษรอ่านง่าย สบายตา" อาจารย์มีความพึงพอใจในระดับ <strong>ดีมาก</strong> โดยมีค่าเฉลี่ยอยู่ที่ 4.67 (S.D. = 0.58)</p>
+  </div>
+
+  <p>สรุปผล จากผลการประเมินในหัวข้อ "ประสิทธิภาพของ AI ในการสร้างข้อสอบจากเนื้อหา PDF", "ความถูกต้องของการตรวจข้อสอบอัตโนมัติ" และ "Item Analysis" สะท้อนให้เห็นว่าระบบจัดการการสอบที่พัฒนาขึ้นสามารถตอบโจทย์และช่วยอำนวยความสะดวกให้กับอาจารย์ผู้สอนได้อย่างเป็นรูปธรรม ทำให้อาจารย์สามารถสร้างข้อสอบคุณภาพ ตรวจข้อสอบ และวิเคราะห์ผลการสอบเชิงสถิติได้อย่างรวดเร็วและแม่นยำ</p>
+
+  <div class="page-num">5-5</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 6 – ระดับความพึงพอใจนักศึกษา (ตาราง 5.5 + กราฟ)
+     ============================================= -->
+<div class="page">
+
+  <p>ผลการประเมินความพึงพอใจโดยนักศึกษา สามารถสรุปผลการประเมินความพึงพอใจโดยรวมอยู่ในระดับ<strong>ดี</strong> มีค่าเฉลี่ยเท่ากับ <strong>4.40</strong> แสดงรายละเอียดได้ดังตารางที่ 5.5</p>
+
+  <p class="tbl-caption">ตารางที่ 5.5&nbsp; ระดับความพึงพอใจของนักศึกษา</p>
+
+  <table class="sat-table">
+    <thead>
+      <tr>
+        <th style="width:52%;">รายการประเมิน</th>
+        <th style="width:14%;">ค่าเฉลี่ย</th>
+        <th style="width:14%;">S.D.</th>
+        <th style="width:20%;">ระดับความพึงพอใจ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="4">1. ด้านการทำงานของระบบ (Functionality)</td></tr>
+      <tr>
+        <td>1.1 ความรวดเร็วในการโหลดข้อสอบและบันทึกคำตอบ</td>
+        <td class="text-center">4.40</td>
+        <td class="text-center">0.70</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr>
+        <td>1.2 ความถูกต้องของระบบจับเวลาและส่งข้อสอบอัตโนมัติ</td>
+        <td class="text-center">4.50</td>
+        <td class="text-center">0.71</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr class="section-head"><td colspan="4">2. ด้านการใช้งาน (Usability)</td></tr>
+      <tr>
+        <td>2.1 ความง่ายในการเข้าสู่ระบบและใช้งานได้ทันที</td>
+        <td class="text-center">4.50</td>
+        <td class="text-center">0.71</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr>
+        <td>2.2 ความสะดวกในการกรอก PIN และเข้าห้องสอบ</td>
+        <td class="text-center">4.60</td>
+        <td class="text-center">0.70</td>
+        <td class="text-center">ดีมาก</td>
+      </tr>
+      <tr>
+        <td>2.3 ความสะดวกในการตอบคำถามและทบทวนคำตอบก่อนส่ง</td>
+        <td class="text-center">4.40</td>
+        <td class="text-center">0.70</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr>
+        <td>2.4 การแสดงผลคะแนนและประวัติการสอบทำงานได้ถูกต้อง ไม่สับสน</td>
+        <td class="text-center">4.50</td>
+        <td class="text-center">0.71</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr class="section-head"><td colspan="4">3. ด้านการออกแบบ (Design)</td></tr>
+      <tr>
+        <td>3.1 ความสวยงามและทันสมัยของหน้าจอทำข้อสอบ</td>
+        <td class="text-center">4.10</td>
+        <td class="text-center">0.57</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr>
+        <td>3.2 การจัดวางปุ่มและเมนูต่าง ๆ เข้าใจได้ง่ายโดยไม่ต้องมีคนสอน</td>
+        <td class="text-center">4.20</td>
+        <td class="text-center">0.63</td>
+        <td class="text-center">ดี</td>
+      </tr>
+      <tr style="background:#e8f0e8;">
+        <td class="text-bold">การประเมินภาพรวมของโครงงาน</td>
+        <td class="text-center text-bold">4.30</td>
+        <td class="text-center text-bold">0.48</td>
+        <td class="text-center text-bold">ดี</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- CHART – นักศึกษา ด้านการทำงาน -->
+  <p>ผลประเมินความพึงพอใจในด้านการทำงานของระบบอยู่ในระดับ<strong>ดี</strong> คิดเป็นเฉลี่ยเท่ากับ <strong>4.45</strong> สามารถแสดงในรูปแบบแผนภูมิแท่ง ดังแผนภูมิที่ 5.4</p>
+
+  <div class="chart-wrapper">
+    <div class="chart-title">แผนภูมิที่ 5.4&nbsp; ด้านการทำงานของระบบส่วนของนักศึกษา</div>
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.40/5 * 36mm);"><span class="bar-val">4.40</span></div>
+          <div class="bar-label">1.1 โหลด<br>ข้อสอบ</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.50/5 * 36mm);"><span class="bar-val">4.50</span></div>
+          <div class="bar-label">1.2 จับเวลา<br>/ ส่งอัตโนมัติ</div>
+        </div>
+      </div>
+      <div class="avg-line">ค่าเฉลี่ยรวม = 4.45</div>
+    </div>
+  </div>
+
+  <p>จากแผนภูมิที่ 5.4 แสดงแผนภูมิผลการประเมินความพึงพอใจของนักศึกษาในด้านการทำงานของระบบ พบว่านักศึกษามีความพึงพอใจภาพรวมอยู่ในระดับ<strong>ดี</strong> โดยมีค่าเฉลี่ยเท่ากับ 4.45 และส่วนเบี่ยงเบนมาตรฐาน (S.D.) เท่ากับ 0.71 จากผลการประเมินในหัวข้อ "ความถูกต้องของระบบจับเวลาและส่งข้อสอบอัตโนมัติ" สะท้อนให้เห็นว่าระบบสามารถตอบโจทย์ด้านความน่าเชื่อถือของกระบวนการสอบได้อย่างเป็นรูปธรรม</p>
+
+  <div class="page-num">5-6</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 7 – กราฟ Usability + Design นักศึกษา
+     ============================================= -->
+<div class="page">
+
+  <p>ผลประเมินความพึงพอใจในด้านการใช้งานอยู่ในระดับ<strong>ดี</strong> คิดเป็นเฉลี่ยเท่ากับ <strong>4.50</strong> สามารถแสดงในรูปแบบแผนภูมิแท่ง ดังแผนภูมิที่ 5.5</p>
+
+  <div class="chart-wrapper">
+    <div class="chart-title">แผนภูมิที่ 5.5&nbsp; ด้านการใช้งานส่วนของนักศึกษา</div>
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.50/5 * 36mm);"><span class="bar-val">4.50</span></div>
+          <div class="bar-label">2.1 เข้าสู่<br>ระบบ</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.60/5 * 36mm);"><span class="bar-val">4.60</span></div>
+          <div class="bar-label">2.2 กรอก<br>PIN</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.40/5 * 36mm);"><span class="bar-val">4.40</span></div>
+          <div class="bar-label">2.3 ตอบ<br>คำถาม</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.50/5 * 36mm);"><span class="bar-val">4.50</span></div>
+          <div class="bar-label">2.4 ดูผล<br>คะแนน</div>
+        </div>
+      </div>
+      <div class="avg-line">ค่าเฉลี่ยรวม = 4.50</div>
+    </div>
+  </div>
+
+  <p>จากแผนภูมิที่ 5.5 แสดงแผนภูมิแท่งผลการประเมินความพึงพอใจของนักศึกษาที่มีต่อระบบในด้านการใช้งาน โดยภาพรวมพบว่านักศึกษามีความพึงพอใจอยู่ในระดับ<strong>ดี</strong> ค่าเฉลี่ยเท่ากับ 4.50 และเมื่อพิจารณาเป็นรายข้อเรียงลำดับตามค่าเฉลี่ยจากมากไปน้อย สามารถสรุปผลได้ดังนี้</p>
+  <div class="indent-block">
+    <p class="no-indent">1. นักศึกษามีความพึงพอใจในระดับ <strong>ดีมาก</strong> ในหัวข้อ "ความสะดวกในการกรอก PIN และเข้าห้องสอบ" โดยมีค่าเฉลี่ยสูงสุดเป็นอันดับหนึ่งอยู่ที่ 4.60 (S.D. = 0.70)</p>
+    <p class="no-indent">2. ลำดับรองลงมาคือหัวข้อ "ความง่ายในการเข้าสู่ระบบ" และ "การแสดงผลคะแนนและประวัติการสอบ" นักศึกษามีความพึงพอใจในระดับ <strong>ดี</strong> โดยมีค่าเฉลี่ยอยู่ที่ 4.50 (S.D. = 0.71)</p>
+    <p class="no-indent">3. หัวข้อที่มีคะแนนประเมินน้อยที่สุดในด้านนี้คือ "ความสะดวกในการตอบคำถามและทบทวนคำตอบก่อนส่ง" ซึ่งยังคงอยู่ในระดับ <strong>ดี</strong> โดยมีค่าเฉลี่ยอยู่ที่ 4.40 (S.D. = 0.70)</p>
+  </div>
+
+  <p>ผลประเมินความพึงพอใจในด้านการออกแบบอยู่ในระดับ<strong>ดี</strong> คิดเป็นเฉลี่ยเท่ากับ <strong>4.15</strong> สามารถแสดงในรูปแบบแผนภูมิแท่ง ดังแผนภูมิที่ 5.6</p>
+
+  <div class="chart-wrapper">
+    <div class="chart-title">แผนภูมิที่ 5.6&nbsp; ด้านการออกแบบส่วนของนักศึกษา</div>
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.10/5 * 36mm);"><span class="bar-val">4.10</span></div>
+          <div class="bar-label">3.1 ความ<br>สวยงาม</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-fill" style="height:calc(4.20/5 * 36mm);"><span class="bar-val">4.20</span></div>
+          <div class="bar-label">3.2 จัดวาง<br>ปุ่ม/เมนู</div>
+        </div>
+      </div>
+      <div class="avg-line">ค่าเฉลี่ยรวม = 4.15</div>
+    </div>
+  </div>
+
+  <p>จากแผนภูมิที่ 5.6 แสดงแผนภูมิแท่งผลการประเมินความพึงพอใจของนักศึกษาที่มีต่อระบบในด้านการออกแบบ โดยภาพรวมพบว่านักศึกษามีความพึงพอใจอยู่ในระดับ<strong>ดี</strong> ค่าเฉลี่ยเท่ากับ 4.15 และเมื่อพิจารณาเป็นรายข้อ สามารถสรุปผลได้ดังนี้</p>
+  <div class="indent-block">
+    <p class="no-indent">1. นักศึกษามีความพึงพอใจในระดับ <strong>ดี</strong> ในหัวข้อ "การจัดวางปุ่มและเมนูต่าง ๆ เข้าใจได้ง่ายโดยไม่ต้องมีคนสอน" โดยมีค่าเฉลี่ยสูงสุดเป็นอันดับหนึ่งอยู่ที่ 4.20 (S.D. = 0.63)</p>
+    <p class="no-indent">2. ลำดับรองลงมาคือหัวข้อ "ความสวยงามและทันสมัยของหน้าจอทำข้อสอบ" นักศึกษามีความพึงพอใจในระดับ <strong>ดี</strong> โดยมีค่าเฉลี่ยอยู่ที่ 4.10 (S.D. = 0.57)</p>
+  </div>
+
+  <p>จากผลการประเมินในภาพรวมของนักศึกษา สะท้อนให้เห็นว่าระบบทำข้อสอบออนไลน์ที่พัฒนาขึ้นสามารถตอบโจทย์ด้านความสะดวกสบายและประสิทธิภาพได้อย่างเป็นรูปธรรม โดยนักศึกษาสามารถเข้าสู่ระบบ กรอก PIN เข้าห้องสอบ ตอบข้อสอบ และดูผลคะแนนได้อย่างง่ายดายโดยไม่เกิดความสับสน</p>
+
+  <div class="page-num">5-7</div>
+</div>
+
+
+<!-- =============================================
+     PAGE 8 – ข้อจำกัด + ข้อเสนอแนะ
+     ============================================= -->
+<div class="page">
+
+  <p>จากผลการประเมินในภาพรวมของโครงงานทั้งหมด สะท้อนให้เห็นว่าระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) ที่พัฒนาขึ้นสามารถตอบโจทย์ด้านประสิทธิภาพการจัดการการสอบและความสะดวกสบายในการใช้งานได้อย่างครบวงจร โดยมีผลการประเมินความพึงพอใจเฉลี่ยรวมอยู่ที่ <strong>4.56</strong> ซึ่งอยู่ในเกณฑ์ระดับ<strong>ดีมาก</strong> ทั้งในส่วนของระบบสำหรับอาจารย์ผู้สอนที่สามารถสร้างข้อสอบ ใช้ AI วิเคราะห์ข้อสอบจาก PDF และวิเคราะห์คุณภาพข้อสอบเชิงสถิติได้อย่างรวดเร็วและแม่นยำ ควบคู่ไปกับระบบทำข้อสอบออนไลน์สำหรับนักศึกษาที่สามารถเข้าสอบด้วย PIN กรอกคำตอบ และดูผลคะแนนได้อย่างง่ายดาย ซึ่งองค์ประกอบทั้งหมดนี้ช่วยให้กระบวนการสอบมีประสิทธิภาพสูงสุด
+
+  <!-- ============ 3. ข้อจำกัด ============ -->
+  <h2 class="sec">3.&nbsp;&nbsp;ข้อจำกัดของโครงงาน</h2>
+
+  <p>การพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) ที่พัฒนาขึ้น มีข้อจำกัดที่ควรทราบดังต่อไปนี้</p>
+
+  <h3 class="subsec">ด้านระบบสำหรับอาจารย์และผู้ดูแลระบบ</h3>
+  <div class="indent-block">
+    <p class="no-indent">1) <strong>ด้านการใช้งาน AI Generator</strong> ฟีเจอร์สร้างข้อสอบด้วย Google Gemini AI จำเป็นต้องอาศัยการเชื่อมต่ออินเทอร์เน็ตที่มีความเสถียรเพื่อเรียกใช้งาน API หากการเชื่อมต่อขัดข้องหรือ API Key หมดโควต้าจะไม่สามารถใช้งานฟีเจอร์ดังกล่าวได้ และระบบในปัจจุบันสามารถสร้างได้เฉพาะข้อสอบประเภทปรนัย (Multiple Choice) เท่านั้น ยังไม่รองรับการสร้างข้อสอบประเภทถูก-ผิดหรืออัตนัยด้วย AI</p>
+
+    <p class="no-indent">2) <strong>ด้านการวิเคราะห์ Item Analysis</strong> ฟีเจอร์วิเคราะห์คุณภาพข้อสอบสามารถวิเคราะห์ได้เฉพาะข้อสอบประเภทปรนัยและถูก-ผิดเท่านั้น ไม่สามารถวิเคราะห์ข้ออัตนัยได้ เนื่องจากการวิเคราะห์แบบ Dichotomous ไม่เหมาะสมกับคะแนนต่อเนื่อง และต้องมีผู้เข้าสอบอย่างน้อย 2 คนขึ้นไปจึงจะสามารถคำนวณได้</p>
+
+    <p class="no-indent">3) <strong>ด้านการจัดการไฟล์ PDF</strong> ระบบรองรับการอัปโหลด PDF ที่มีข้อความแบบ Text-based เท่านั้น ไม่รองรับ PDF ที่เป็นไฟล์รูปภาพสแกน (Scanned PDF) ซึ่งจะต้องผ่านกระบวนการ OCR ก่อน</p>
+  </div>
+
+  <h3 class="subsec">ด้านระบบทำข้อสอบสำหรับนักศึกษา</h3>
+  <div class="indent-block">
+    <p class="no-indent">1) <strong>ด้านความต้องการของระบบ</strong> ระบบรองรับเฉพาะการใช้งานผ่านเว็บเบราว์เซอร์บนอุปกรณ์ที่มีการเชื่อมต่ออินเทอร์เน็ต ยังไม่มีแอปพลิเคชันบนมือถือ (Mobile App) และยังไม่รองรับการทำข้อสอบแบบออฟไลน์</p>
+
+    <p class="no-indent">2) <strong>ด้านการป้องกันการทุจริต</strong> ระบบในปัจจุบันสามารถตรวจจับพฤติกรรมน่าสงสัยได้เพียงบางส่วน เช่น เวลาทำข้อสอบสั้นผิดปกติ แต่ยังไม่มีระบบตรวจจับการออกจากหน้าเว็บ (Tab Switching) หรือการจับภาพหน้าจอ</p>
+  </div>
+
+  <!-- ============ 4. ข้อเสนอแนะ ============ -->
+  <h2 class="sec">4.&nbsp;&nbsp;ข้อเสนอแนะเพื่อการพัฒนาต่อ</h2>
+
+  <p>การพัฒนาระบบบริหารจัดการการสอบอัจฉริยะแบบครบวงจร (Smart Exam) ในอนาคตสามารถพัฒนาต่อยอดได้ดังต่อไปนี้</p>
+
+  <h3 class="subsec">ด้านการพัฒนาระบบสำหรับอาจารย์และผู้ดูแลระบบ</h3>
+  <div class="indent-block">
+    <p class="no-indent">1) <strong>ขยายความสามารถของ AI Generator</strong> พัฒนาให้ AI สามารถสร้างข้อสอบหลายรูปแบบได้พร้อมกัน ทั้งปรนัย ถูก-ผิด และอัตนัย พร้อมเพิ่มความสามารถในการสรุปเนื้อหาจากไฟล์ PDF แบบ Scanned ด้วยการนำเทคโนโลยี OCR มาบูรณาการ</p>
+
+    <p class="no-indent">2) <strong>พัฒนาระบบรายงานเชิงลึก</strong> ควรมีการพัฒนาหน้ารายงานให้สามารถแสดงผลเปรียบเทียบสถิติคะแนนระหว่างกลุ่มเรียน ระหว่างชุดข้อสอบ และระหว่างเทอม รวมถึงรองรับการ Export รายงานในรูปแบบ PDF และ Excel</p>
+
+    <p class="no-indent">3) <strong>พัฒนาระบบจัดการห้องสอบ (Proctoring)</strong> ควรมีการเพิ่มฟีเจอร์ตรวจจับการออกจากหน้าเว็บ (Tab Switching Detection) และบันทึก Log การกระทำของนักศึกษาระหว่างสอบ เพื่อเพิ่มความน่าเชื่อถือของกระบวนการสอบ</p>
+  </div>
+
+  <h3 class="subsec">ด้านการพัฒนาระบบสำหรับนักศึกษา</h3>
+  <div class="indent-block">
+    <p class="no-indent">1) <strong>พัฒนา Mobile Application</strong> พัฒนาแอปพลิเคชันบนมือถือทั้ง iOS และ Android เพื่อรองรับการทำข้อสอบบนสมาร์ตโฟนได้สะดวกยิ่งขึ้น และรองรับการทำข้อสอบแบบออฟไลน์โดยซิงค์ข้อมูลเมื่อมีอินเทอร์เน็ต</p>
+
+    <p class="no-indent">2) <strong>การกรองและแนะนำเนื้อหาเฉพาะบุคคล</strong> พัฒนาให้ระบบสามารถวิเคราะห์จุดอ่อนของนักศึกษาจากประวัติการสอบ และแนะนำข้อสอบที่เหมาะสมกับระดับความสามารถของแต่ละคน เพื่อส่งเสริมการเรียนรู้แบบ Adaptive Learning</p>
+
+    <p class="no-indent">3) <strong>การรองรับหลายภาษา</strong> เนื่องจากสถาบันการศึกษามีนักศึกษาต่างชาติ ควรมีการนำ AI มาประยุกต์ใช้ในการแปลภาษาข้อสอบอัตโนมัติ ตามการตั้งค่าภาษาของผู้ใช้งาน เพื่อให้ระบบสามารถรองรับผู้ใช้ได้หลากหลายกลุ่มมากยิ่งขึ้น</p>
+  </div>
+
+  <div style="text-align:center; margin-top:15mm; font-size:14pt; color:#555; border-top:1px solid #ddd; padding-top:4mm;">
+    — จบบทที่ 5 สรุปผลการปฏิบัติงาน —
+  </div>
+
+  <div class="page-num">5-8</div>
+</div>
+
+</body>
+</html>

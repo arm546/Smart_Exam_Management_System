@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</title>
+<style>
+  /* ====================================================
+     PRINT / DOCUMENT STYLES
+     ==================================================== */
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;900&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sarabun', 'TH Sarabun New', 'AngsanaNew', serif;
+    font-size: 16pt;
+    line-height: 1.8;
+    color: #000;
+    background: #e8e8e8;
+  }
+
+  /* ---- Page layout ---- */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 12mm auto;
+    background: #fff;
+    padding: 30mm 25mm 25mm 30mm; /* top right bottom left */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+    page-break-after: always;
+  }
+
+  /* ====================================================
+     HEADINGS
+     ==================================================== */
+  h1.chapter-title {
+    font-size: 20pt;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 6mm;
+    border-bottom: 3px solid #1a3c72;
+    padding-bottom: 4mm;
+    color: #1a3c72;
+    letter-spacing: 0.5px;
+  }
+
+  h2.section-title {
+    font-size: 17pt;
+    font-weight: 700;
+    color: #1a3c72;
+    margin-top: 8mm;
+    margin-bottom: 3mm;
+    border-left: 5px solid #1a3c72;
+    padding-left: 4mm;
+  }
+
+  h3.sub-title {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #2c5f2e;
+    margin-top: 5mm;
+    margin-bottom: 2mm;
+    padding-left: 8mm;
+  }
+
+  h4.step-title {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #333;
+    margin-top: 4mm;
+    margin-bottom: 1.5mm;
+    padding-left: 12mm;
+  }
+
+  /* ====================================================
+     TEXT
+     ==================================================== */
+  p {
+    font-size: 16pt;
+    margin-bottom: 3mm;
+    text-align: justify;
+    text-indent: 10mm;
+  }
+  p.no-indent { text-indent: 0; }
+
+  ul, ol {
+    margin-left: 18mm;
+    margin-bottom: 3mm;
+  }
+  li {
+    font-size: 15pt;
+    margin-bottom: 1.5mm;
+    line-height: 1.7;
+  }
+
+  /* ====================================================
+     ROLE BADGE
+     ==================================================== */
+  .role-badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-size: 13pt;
+    font-weight: 700;
+  }
+  .role-admin   { background: #dc3545; color: #fff; }
+  .role-teacher { background: #0d6efd; color: #fff; }
+  .role-student { background: #198754; color: #fff; }
+
+  /* ====================================================
+     TABLE OF CONTENTS
+     ==================================================== */
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1.5mm;
+    font-size: 15pt;
+  }
+  .toc-text { flex: 1; }
+  .toc-dots {
+    flex: 1;
+    border-bottom: 1px dotted #555;
+    margin: 0 3mm;
+    min-width: 10mm;
+  }
+  .toc-page {
+    white-space: nowrap;
+    font-weight: 700;
+    min-width: 8mm;
+    text-align: right;
+  }
+  .toc-section {
+    margin-bottom: 2mm;
+    padding-left: 6mm;
+  }
+  .toc-sub {
+    padding-left: 12mm;
+    font-size: 14pt;
+  }
+
+  /* ====================================================
+     FIGURE / SCREENSHOT PLACEHOLDER
+     ==================================================== */
+  .figure-box {
+    border: 2px dashed #aaa;
+    background: #f8f9fc;
+    text-align: center;
+    padding: 8mm;
+    margin: 4mm 0 2mm 0;
+    border-radius: 4px;
+    font-size: 13pt;
+    color: #555;
+    min-height: 45mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .figure-box .icon { font-size: 28pt; margin-bottom: 2mm; }
+
+  .figure-caption {
+    text-align: center;
+    font-size: 14pt;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 4mm;
+    text-indent: 0;
+  }
+
+  /* ====================================================
+     HIGHLIGHT BOX
+     ==================================================== */
+  .note-box {
+    border-left: 4px solid #ffc107;
+    background: #fffbf0;
+    padding: 3mm 5mm;
+    margin: 3mm 0;
+    font-size: 14pt;
+    border-radius: 0 4px 4px 0;
+  }
+  .note-box.danger {
+    border-left-color: #dc3545;
+    background: #fff5f5;
+  }
+  .note-box.info {
+    border-left-color: #0d6efd;
+    background: #f0f5ff;
+  }
+  .note-box.success {
+    border-left-color: #198754;
+    background: #f0fff4;
+  }
+
+  /* ====================================================
+     STEP BLOCK
+     ==================================================== */
+  .step-block {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 3mm;
+  }
+  .step-num {
+    min-width: 8mm;
+    height: 8mm;
+    background: #1a3c72;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13pt;
+    font-weight: 700;
+    margin-right: 4mm;
+    margin-top: 1mm;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; font-size: 15pt; }
+
+  /* ====================================================
+     SYSTEM OVERVIEW TABLE
+     ==================================================== */
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0;
+    font-size: 14pt;
+  }
+  .overview-table th {
+    background: #1a3c72;
+    color: #fff;
+    padding: 2.5mm 4mm;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: 700;
+    border: 1px solid #1a3c72;
+  }
+  .overview-table td {
+    padding: 2mm 4mm;
+    border: 1px solid #ccc;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .overview-table tr:nth-child(even) td { background: #f5f5f5; }
+
+  /* ====================================================
+     PAGE HEADER / FOOTER
+     ==================================================== */
+  .page-header {
+    text-align: center;
+    font-size: 12pt;
+    color: #666;
+    margin-bottom: 8mm;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 3mm;
+  }
+  .page-footer {
+    position: absolute;
+    bottom: 15mm;
+    left: 30mm;
+    right: 25mm;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12pt;
+    color: #666;
+    border-top: 1px solid #ddd;
+    padding-top: 2mm;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 5mm 0;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      padding: 25mm 20mm 20mm 25mm;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     PAGE 1 – COVER PAGE
+     ===================================================== -->
+<div class="page" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+  <div style="font-size:14pt; color:#666; margin-bottom:6mm;">ปริญญานิพนธ์ / สารนิพนธ์</div>
+  <h1 style="font-size:22pt; font-weight:900; color:#1a3c72; line-height:1.5; margin-bottom:8mm;">
+    ภาคผนวก ก
+  </h1>
+  <h2 style="font-size:19pt; font-weight:700; color:#333; margin-bottom:10mm; border:none; padding:0;">
+    คู่มือการใช้งานระบบ
+  </h2>
+  <div style="font-size:20pt; font-weight:900; color:#1a3c72; background:#eef2ff; border:2px solid #1a3c72; border-radius:8px; padding:5mm 12mm; margin-bottom:10mm;">
+    Smart Exam<br>
+    <span style="font-size:14pt; font-weight:400; color:#555;">ระบบบริหารจัดการการสอบอัจฉริยะเชิงครบวงจร</span><br>
+    <span style="font-size:13pt; font-weight:400; color:#777;">A Comprehensive Intelligent Examination Management System</span>
+  </div>
+  <div style="font-size:15pt; color:#444; line-height:2; margin-top:8mm;">
+    <div>เวอร์ชัน 1.0</div>
+    <div>พัฒนาด้วย PHP / MySQL / Google Gemini AI API</div>
+    <div style="font-size:15pt; color:#1a3c72; font-weight:700; margin-top:4mm;">
+      ลิงก์สำหรับเข้าใช้งานระบบ: <br>
+      <a href="https://smart-exam-management-system.infinityfreeapp.com" target="_blank" style="color:#0d6efd; text-decoration:underline;">https://smart-exam-management-system.infinityfreeapp.com</a><br>
+      <strong>Username:</strong> <code style="font-weight:bold; color:#000;">admin</code> &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Password:</strong> <code style="font-weight:bold; color:#000;">admin123</code>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 2 – TABLE OF CONTENTS
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+  <h1 class="chapter-title">สารบัญ</h1>
+  <div style="margin-top:6mm;">
+
+    <div class="toc-section">
+      <div class="toc-item">
+        <span class="toc-text" style="font-weight:700;">1. บทนำและภาพรวมระบบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-3</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">1.1 วัตถุประสงค์ของระบบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-3</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">1.2 ผู้ใช้งานระบบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-3</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">1.3 ความต้องการของระบบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-4</span>
+      </div>
+    </div>
+
+    <div class="toc-section" style="margin-top:2mm;">
+      <div class="toc-item">
+        <span class="toc-text" style="font-weight:700;">2. การเข้าสู่ระบบ (Login)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-4</span>
+      </div>
+    </div>
+
+    <div class="toc-section" style="margin-top:2mm;">
+      <div class="toc-item">
+        <span class="toc-text" style="font-weight:700;">3. คู่มือสำหรับผู้ดูแลระบบ (Admin)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-6</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">3.1 แดชบอร์ดผู้ดูแลระบบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-6</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">3.2 การจัดการผู้ใช้งาน</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-7</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">3.3 การจัดการรายวิชาและผู้สอน</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-9</span>
+      </div>
+    </div>
+
+    <div class="toc-section" style="margin-top:2mm;">
+      <div class="toc-item">
+        <span class="toc-text" style="font-weight:700;">4. คู่มือสำหรับอาจารย์ (Teacher)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-11</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">4.1 แดชบอร์ดอาจารย์</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-11</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">4.2 การสร้างชุดข้อสอบใหม่</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-12</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">4.3 การจัดการโจทย์และคลังข้อสอบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-14</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">4.4 การสร้างข้อสอบด้วย AI (PDF Support)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-16</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">4.5 การดูผลการสอบและตรวจข้อสอบอัตนัย</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-18</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">4.6 การวิเคราะห์คุณภาพข้อสอบ (Item Analysis)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-20</span>
+      </div>
+    </div>
+
+    <div class="toc-section" style="margin-top:2mm;">
+      <div class="toc-item">
+        <span class="toc-text" style="font-weight:700;">5. คู่มือสำหรับนักศึกษา (Student)</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-22</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">5.1 แดชบอร์ดนักศึกษา</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-22</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">5.2 การเข้าห้องสอบด้วยรหัส PIN</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-23</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">5.3 การทำข้อสอบ</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-24</span>
+      </div>
+      <div class="toc-item toc-sub">
+        <span class="toc-text">5.4 การดูผลการสอบของตนเอง</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-25</span>
+      </div>
+    </div>
+
+    <div class="toc-section" style="margin-top:2mm;">
+      <div class="toc-item">
+        <span class="toc-text" style="font-weight:700;">6. การจัดการโปรไฟล์ส่วนตัว</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">ก-26</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-2</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 3 – ภาพรวมระบบ
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h1 class="chapter-title">1. บทนำและภาพรวมระบบ</h1>
+
+  <h2 class="section-title">1.1 วัตถุประสงค์ของระบบ</h2>
+  <p>ระบบ <strong>Smart Exam</strong> (A Comprehensive Intelligent Examination Management System) คือระบบบริหารจัดการการสอบออนไลน์แบบครบวงจร ที่ออกแบบมาเพื่อรองรับการสอบในสถาบันการศึกษาระดับอุดมศึกษา โดยบูรณาการเทคโนโลยีปัญญาประดิษฐ์ (AI) ผ่าน Google Gemini API เข้ากับกระบวนการออกข้อสอบและการประเมินผล</p>
+
+  <p>ระบบมีความสามารถครอบคลุมตั้งแต่การสร้างข้อสอบโดยอาจารย์หรือผ่าน AI ที่วิเคราะห์จากเอกสาร PDF การทำข้อสอบออนไลน์แบบจับเวลาของนักศึกษา การตรวจอัตโนมัติสำหรับข้อปรนัยและถูก-ผิด การตรวจข้ออัตนัยโดยอาจารย์ ตลอดจนการวิเคราะห์คุณภาพข้อสอบเชิงสถิติ (Item Analysis)</p>
+
+  <h2 class="section-title">1.2 ผู้ใช้งานระบบ (User Roles)</h2>
+  <p class="no-indent">ระบบรองรับผู้ใช้งาน 3 ระดับ ดังนี้</p>
+
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th style="width:18%;">บทบาท</th>
+        <th>สิทธิ์และความสามารถ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center;"><span class="role-badge role-admin">Admin</span><br><small>ผู้ดูแลระบบ</small></td>
+        <td>
+          <ul style="margin-left:5mm;">
+            <li>จัดการผู้ใช้งานทั้งหมด (อาจารย์และนักศึกษา)</li>
+            <li>จัดการรายวิชาและกำหนดอาจารย์ผู้สอน</li>
+            <li>ดูภาพรวมสถิติการสอบทั้งระบบ</li>
+            <li>Import/Export ข้อมูลผ่าน CSV</li>
+            <li>ติดตามแจ้งเตือนทุจริตการสอบ</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:center;"><span class="role-badge role-teacher">Teacher</span><br><small>อาจารย์</small></td>
+        <td>
+          <ul style="margin-left:5mm;">
+            <li>สร้างและจัดการชุดข้อสอบ</li>
+            <li>สร้างข้อสอบด้วย AI จาก PDF หรือข้อความ</li>
+            <li>จัดการคลังข้อสอบส่วนตัว</li>
+            <li>ดูผลการสอบและตรวจข้ออัตนัย</li>
+            <li>วิเคราะห์คุณภาพข้อสอบเชิงสถิติ</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align:center;"><span class="role-badge role-student">Student</span><br><small>นักศึกษา</small></td>
+        <td>
+          <ul style="margin-left:5mm;">
+            <li>เข้าห้องสอบด้วยรหัส PIN 6 หลัก</li>
+            <li>ทำข้อสอบแบบจับเวลา (ปรนัย/ถูก-ผิด/อัตนัย)</li>
+            <li>ดูผลการสอบและประวัติการสอบของตนเอง</li>
+            <li>ติดตามกราฟพัฒนาการคะแนนสอบ</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- วางต่อท้ายใต้ </table> ในหน้า 3 -->
+  <div class="note-box info" style="margin-top: 4mm;">
+    <strong>ℹ️ บัญชีผู้ดูแลระบบเริ่มต้น (Default Super Admin):</strong> สำหรับการติดตั้งและเข้าใช้งานระบบครั้งแรก สามารถเข้าสู่ระบบด้วยสิทธิ์ Admin ได้ทันทีผ่านบัญชี <strong>Username:</strong> <code>admin</code> และ <strong>Password:</strong> <code>admin123</code>
+  </div>
+
+  <h2 class="section-title">1.3 ความต้องการของระบบ</h2>
+  <ul>
+    <li><strong>เว็บเบราว์เซอร์:</strong> Google Chrome, Mozilla Firefox, Microsoft Edge (เวอร์ชันล่าสุด)</li>
+    <li><strong>การเชื่อมต่ออินเทอร์เน็ต:</strong> จำเป็นต้องเชื่อมต่ออินเทอร์เน็ตที่มีความเสถียรตลอดเวลาในการใช้งานระบบ (เนื่องจากเป็นระบบ Web Application แบบออนไลน์)</li>
+    <li><strong>ระบบแม่ข่าย (Server-side):</strong> รองรับการทำงานบน Web Hosting มาตรฐานที่ใช้สถาปัตยกรรม PHP 7.4+ และ MySQL 5.7+ ขึ้นไป</li>
+    <li><strong>ขนาดหน้าจอที่แนะนำ:</strong> 1280×720 พิกเซลขึ้นไป</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-3</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 4 – การเข้าสู่ระบบ
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h1 class="chapter-title">2. การเข้าสู่ระบบ (Login)</h1>
+
+  <p>เมื่อเปิดเว็บเบราว์เซอร์และเข้าถึง URL ของระบบ Smart Exam ระบบจะแสดงหน้าเข้าสู่ระบบซึ่งประกอบด้วย 2 ส่วนหลัก ได้แก่ รูปภาพประกอบด้านซ้าย และแบบฟอร์มเข้าสู่ระบบด้านขวา</p>
+
+  <div class="figure-box">
+    <div class="icon">🖥️</div>
+    <strong>ภาพที่ ก.1</strong> หน้าเข้าสู่ระบบ (Login Page)<br>
+    <small style="margin-top:2mm;">[แสดงหน้าจอ login.php พร้อมโลโก้ Smart Exam และแบบฟอร์ม Username/Password]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.1 หน้าเข้าสู่ระบบ Smart Exam</p>
+
+  <h2 class="section-title">ขั้นตอนการเข้าสู่ระบบ</h2>
+
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">เปิดเว็บเบราว์เซอร์และเข้าสู่ URL: <code>https://smart-exam-management-system.infinityfreeapp.com</code> ระบบจะนำไปยังหน้า Login โดยอัตโนมัติ</div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอก <strong>ชื่อผู้ใช้งาน (Username)</strong> ในช่องแรก ซึ่งได้รับจากผู้ดูแลระบบหรืออาจารย์ผู้สอน</div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">กรอก <strong>รหัสผ่าน (Password)</strong> ในช่องที่สอง</div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">คลิกปุ่ม <strong>"เข้าสู่ระบบ"</strong> หรือกด Enter ระบบจะตรวจสอบข้อมูลและนำไปยังแดชบอร์ดตามบทบาทของผู้ใช้งาน</div>
+  </div>
+
+  <div class="note-box danger">
+    <strong>⚠️ ข้อควรระวัง:</strong> หากกรอก Username หรือ Password ไม่ถูกต้อง ระบบจะแสดงข้อความ "ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง!" ให้ตรวจสอบข้อมูลและลองใหม่อีกครั้ง หากลืมรหัสผ่านให้ติดต่อผู้ดูแลระบบเพื่อรีเซ็ต
+  </div>
+
+  <div class="note-box info" style="margin-top:3mm;">
+    <strong>ℹ️ หมายเหตุ:</strong> บัญชีผู้ใช้ที่ถูกระงับ (Suspended) โดยผู้ดูแลระบบจะไม่สามารถเข้าสู่ระบบได้ แม้จะกรอกข้อมูลถูกต้องก็ตาม
+  </div>
+
+  <h2 class="section-title">การออกจากระบบ (Logout)</h2>
+  <p>เมื่อต้องการออกจากระบบ ให้คลิกที่รูปโปรไฟล์ด้านบนขวาของหน้าจอ แล้วเลือก <strong>"ออกจากระบบ"</strong> ระบบจะล้างข้อมูล Session และนำกลับไปยังหน้า Login</p>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-4</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 5 – Admin Dashboard
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h1 class="chapter-title">3. คู่มือสำหรับผู้ดูแลระบบ (Admin)</h1>
+
+  <h2 class="section-title">3.1 แดชบอร์ดผู้ดูแลระบบ</h2>
+  <p>เมื่อเข้าสู่ระบบในฐานะผู้ดูแลระบบ จะพบหน้าแดชบอร์ดแสดงสถิติภาพรวมของระบบทั้งหมด ประกอบด้วย</p>
+
+  <div class="figure-box">
+    <div class="icon">📊</div>
+    <strong>ภาพที่ ก.2</strong> แดชบอร์ดผู้ดูแลระบบ (Admin Dashboard)<br>
+    <small style="margin-top:2mm;">[แสดงการ์ดสถิติ 4 ใบ: นักศึกษาทั้งหมด, อาจารย์ทั้งหมด, รายวิชา, แจ้งเตือนทุจริต และกราฟ Line Chart]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.2 หน้าแดชบอร์ดของผู้ดูแลระบบ</p>
+
+  <p class="no-indent">การ์ดสถิติหลักบนแดชบอร์ดผู้ดูแลระบบ ได้แก่</p>
+  <ul>
+    <li><strong>นักศึกษาทั้งหมด:</strong> แสดงจำนวนนักศึกษาที่มีบัญชีในระบบทั้งหมด</li>
+    <li><strong>อาจารย์ทั้งหมด:</strong> แสดงจำนวนอาจารย์ที่มีบัญชีในระบบ</li>
+    <li><strong>รายวิชาในระบบ:</strong> แสดงจำนวนรายวิชาที่เปิดใช้งาน</li>
+    <li><strong>แจ้งเตือนทุจริตการสอบ:</strong> แสดงจำนวนกรณีที่ระบบตรวจพบพฤติกรรมน่าสงสัย</li>
+  </ul>
+  <p>ส่วนล่างของแดชบอร์ดแสดง <strong>กราฟเส้น</strong> (Line Chart) สถิติจำนวนการส่งข้อสอบในช่วง 7 วันที่ผ่านมา เพื่อให้ผู้ดูแลระบบเห็นภาพกิจกรรมการสอบโดยรวม</p>
+
+  <h2 class="section-title">เมนูหลักของผู้ดูแลระบบ</h2>
+  <p class="no-indent">แถบเมนูด้านซ้าย (Sidebar) ของผู้ดูแลระบบประกอบด้วยเมนูดังนี้</p>
+  <table class="overview-table">
+    <thead>
+      <tr><th style="width:30%;">เมนู</th><th>หน้าที่</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>แดชบอร์ด</td><td>หน้าหลักแสดงสถิติภาพรวม</td></tr>
+      <tr><td>จัดการผู้ใช้งาน</td><td>เพิ่ม/แก้ไข/ระงับบัญชีผู้ใช้ นำเข้าจาก CSV</td></tr>
+      <tr><td>จัดการรายวิชา</td><td>เพิ่ม/แก้ไขรายวิชา กำหนดอาจารย์ผู้สอน</td></tr>
+      <tr><td>คลังข้อสอบ</td><td>ดูภาพรวมข้อสอบทั้งหมดในระบบ</td></tr>
+      <tr><td>รายงาน</td><td>รายงานสรุปผลการสอบ</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-5</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 6 – จัดการผู้ใช้งาน
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">3.2 การจัดการผู้ใช้งาน (Manage Users)</h2>
+  <p>เมนู <strong>"จัดการผู้ใช้งาน"</strong> ให้ผู้ดูแลระบบสามารถบริหารบัญชีผู้ใช้ทั้งหมด (ยกเว้นบัญชี Admin) ได้อย่างครบวงจร</p>
+
+  <div class="figure-box">
+    <div class="icon">👥</div>
+    <strong>ภาพที่ ก.3</strong> หน้าจัดการผู้ใช้งาน (Manage Users)<br>
+    <small style="margin-top:2mm;">[แสดงตารางรายชื่อผู้ใช้ มีคอลัมน์ Username, ชื่อ-นามสกุล, ประเภท, รหัสนักศึกษา, คณะ, สาขา, วิชาที่สอน, สถานะ, ปุ่มจัดการ]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.3 หน้าจัดการผู้ใช้งาน</p>
+
+  <h3 class="sub-title">3.2.1 การเพิ่มผู้ใช้งานใหม่</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">คลิกปุ่ม <strong>"+ เพิ่มผู้ใช้ใหม่"</strong> (สีน้ำเงิน) ที่ด้านบนของหน้า กล่องฟอร์ม (Modal) จะปรากฏขึ้น</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอกข้อมูลที่จำเป็น ได้แก่ <strong>Username</strong>, <strong>รหัสผ่าน</strong>, <strong>ชื่อ-นามสกุล</strong> และเลือก <strong>ประเภทผู้ใช้</strong> (นักศึกษา หรือ อาจารย์)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">หากเลือกประเภท <strong>"นักศึกษา"</strong> ให้กรอกข้อมูลเพิ่มเติม ได้แก่ รหัสนักศึกษา คณะ สาขาวิชา และชั้นปี</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">คลิกปุ่ม <strong>"บันทึกข้อมูล"</strong> เพื่อสร้างบัญชีผู้ใช้ใหม่</div>
+  </div>
+
+  <h3 class="sub-title">3.2.2 การนำเข้าผู้ใช้จำนวนมากผ่าน CSV</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">คลิกปุ่ม <strong>"นำเข้าจาก CSV"</strong> (สีเขียว) หน้า Modal จะปรากฏขึ้น</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">เตรียมไฟล์ CSV โดยมีคอลัมน์เรียงตามลำดับ: <code>username, password, fullname, role, student_code, faculty, major, year_level</code></div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">คลิก <strong>"เลือกไฟล์"</strong> เพื่อเลือกไฟล์ CSV จากเครื่อง จากนั้นคลิก <strong>"อัปโหลดและนำเข้า"</strong></div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">ระบบจะแจ้งผลการนำเข้า แสดงจำนวนรายการที่สำเร็จและรายการที่ข้ามเนื่องจากซ้ำหรือผิดพลาด</div>
+  </div>
+
+  <h3 class="sub-title">3.2.3 การแก้ไขและจัดการบัญชีผู้ใช้</h3>
+  <ul>
+    <li><strong>แก้ไขข้อมูล:</strong> คลิกปุ่ม <span style="background:#ffc107; padding:1px 5px; border-radius:3px; font-size:13pt;">✏️</span> (สีเหลือง) เพื่อแก้ไขข้อมูล</li>
+    <li><strong>รีเซ็ตรหัสผ่าน:</strong> คลิกปุ่ม <span style="background:#17a2b8; padding:1px 5px; border-radius:3px; color:white; font-size:13pt;">🔑</span> (สีฟ้า) ระบบจะสุ่มรหัสผ่านใหม่ 8 หลักและแสดงให้ Copy</li>
+    <li><strong>ระงับ/เปิดใช้งาน:</strong> คลิกปุ่มเปิด/ปิด เพื่อเปลี่ยนสถานะบัญชี บัญชีที่ถูกระงับจะไม่สามารถเข้าสู่ระบบได้</li>
+    <li><strong>ส่งออก CSV:</strong> คลิกปุ่ม <strong>"ส่งออก CSV"</strong> เพื่อดาวน์โหลดรายชื่อผู้ใช้ทั้งหมดในรูปแบบ CSV</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-6</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 7 – จัดการรายวิชา
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">3.3 การจัดการรายวิชาและผู้สอน (Manage Courses)</h2>
+  <p>เมนู <strong>"จัดการรายวิชา"</strong> ช่วยให้ผู้ดูแลระบบสามารถเพิ่ม แก้ไข เปิด/ปิดรายวิชา และกำหนดอาจารย์ผู้สอนประจำวิชาได้</p>
+
+  <div class="figure-box">
+    <div class="icon">📚</div>
+    <strong>ภาพที่ ก.4</strong> หน้าจัดการรายวิชา (Manage Courses)<br>
+    <small style="margin-top:2mm;">[แสดงตารางรายวิชา มีคอลัมน์ รหัสวิชา, ชื่อรายวิชา, จำนวนผู้สอน, สถานะ, ปุ่มจัดการ]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.4 หน้าจัดการรายวิชา</p>
+
+  <h3 class="sub-title">3.3.1 การเพิ่มรายวิชาใหม่</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">คลิกปุ่ม <strong>"+ เพิ่มรายวิชา"</strong> กล่องฟอร์มจะปรากฏขึ้น</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอก <strong>รหัสวิชา</strong> (เช่น CS101) และ <strong>ชื่อรายวิชา</strong> (เช่น การเขียนโปรแกรมเบื้องต้น) ระบบจะแปลงรหัสวิชาเป็นตัวพิมพ์ใหญ่อัตโนมัติ</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">คลิก <strong>"บันทึกข้อมูล"</strong> เพื่อสร้างรายวิชา</div>
+  </div>
+
+  <h3 class="sub-title">3.3.2 การกำหนดอาจารย์ผู้สอน</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">คลิกปุ่ม <strong>"กำหนดผู้สอน"</strong> (สีฟ้า) ในแถวของวิชาที่ต้องการ</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">ในกล่อง Modal ที่ปรากฏ ให้ค้นหาและเลือกรายชื่ออาจารย์จาก Dropdown (รองรับการเลือกหลายคนได้พร้อมกัน)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">คลิก <strong>"บันทึกการมอบหมาย"</strong> ระบบจะผูกวิชากับอาจารย์ที่เลือก อาจารย์จะเห็นวิชานี้ในรายการสร้างข้อสอบทันที</div>
+  </div>
+
+  <h3 class="sub-title">3.3.3 การนำเข้ารายวิชาผ่าน CSV</h3>
+  <p>ระบบรองรับการนำเข้ารายวิชาพร้อมกำหนดผู้สอนผ่าน CSV โดยมีรูปแบบคอลัมน์ดังนี้</p>
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th>คอลัมน์</th>
+        <th>รายละเอียด</th>
+        <th>ตัวอย่าง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1. รหัสวิชา</td><td>รหัสวิชา (ตัวพิมพ์ใหญ่)</td><td>CS101</td></tr>
+      <tr><td>2. ชื่อวิชา</td><td>ชื่อรายวิชาภาษาไทย/อังกฤษ</td><td>การเขียนโปรแกรม</td></tr>
+      <tr><td>3. สถานะ</td><td>1 = เปิดใช้งาน, 0 = ปิดใช้งาน</td><td>1</td></tr>
+      <tr><td>4. Username อาจารย์</td><td>Username คั่นด้วยลูกน้ำ (ถ้ามีหลายคน)</td><td>aj01,aj02</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note-box success" style="margin-top:3mm;">
+    <strong>✅ เคล็ดลับ:</strong> สามารถดาวน์โหลดไฟล์ CSV ต้นฉบับปัจจุบันได้โดยคลิกปุ่ม <strong>"ส่งออก CSV"</strong> จากนั้นแก้ไขข้อมูลและนำเข้าใหม่ ระบบจะอัปเดตข้อมูลที่มีอยู่แล้วโดยอัตโนมัติ
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-7</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 8 – Teacher Dashboard & สร้างข้อสอบ
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h1 class="chapter-title">4. คู่มือสำหรับอาจารย์ (Teacher)</h1>
+
+  <h2 class="section-title">4.1 แดชบอร์ดอาจารย์</h2>
+  <p>เมื่อเข้าสู่ระบบในฐานะอาจารย์ จะพบหน้าแดชบอร์ดแสดงข้อมูลสำคัญที่ต้องดำเนินการ ดังนี้</p>
+
+  <div class="figure-box">
+    <div class="icon">🎓</div>
+    <strong>ภาพที่ ก.5</strong> แดชบอร์ดอาจารย์<br>
+    <small style="margin-top:2mm;">[แสดงการ์ด 4 ใบ: วิชาที่รับผิดชอบ, ข้อสอบ Active, รอตรวจอัตนัย, ผู้ต้องสงสัยทุจริต + กราฟ Bar Chart สถิติคะแนน]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.5 หน้าแดชบอร์ดของอาจารย์</p>
+
+  <p class="no-indent">การ์ดสถิติบนแดชบอร์ดอาจารย์ ได้แก่</p>
+  <ul>
+    <li><strong>วิชาที่รับผิดชอบสอน:</strong> จำนวนรายวิชาที่ได้รับมอบหมาย</li>
+    <li><strong>ข้อสอบ (Active):</strong> จำนวนชุดข้อสอบที่เปิดใช้งานอยู่ในขณะนี้</li>
+    <li><strong>รอตรวจข้อสอบอัตนัย:</strong> จำนวนข้อที่รอการตรวจสอบด้วยตนเอง</li>
+    <li><strong>ผู้ต้องสงสัยทุจริต:</strong> จำนวนกรณีที่ระบบตรวจพบพฤติกรรมน่าสงสัย</li>
+  </ul>
+  <p>ส่วนกราฟ <strong>Bar Chart</strong> แสดงสถิติคะแนนสูงสุด/เฉลี่ย/ต่ำสุดของ 5 การสอบล่าสุด และตาราง <strong>"ผู้เรียนที่ส่งข้อสอบล่าสุด"</strong> แสดง 5 รายการล่าสุด</p>
+
+  <h2 class="section-title">4.2 การสร้างชุดข้อสอบใหม่ (Create Exam)</h2>
+  <p>อาจารย์สามารถสร้างชุดข้อสอบใหม่ได้โดยเลือกเมนู <strong>"สร้างข้อสอบ"</strong> จากแถบด้านซ้าย</p>
+
+  <div class="figure-box">
+    <div class="icon">📝</div>
+    <strong>ภาพที่ ก.6</strong> หน้าสร้างชุดข้อสอบ (Create Exam)<br>
+    <small style="margin-top:2mm;">[แสดงฟอร์มสร้างข้อสอบ มีส่วน: ข้อมูลพื้นฐาน, การตั้งค่าเวลา, PIN, คำชี้แจง]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.6 หน้าสร้างชุดข้อสอบใหม่</p>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-8</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 9 – สร้างข้อสอบ (ต่อ)
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h3 class="sub-title">ขั้นตอนการสร้างชุดข้อสอบ</h3>
+
+  <h4 class="step-title">ส่วนที่ 1 – ข้อมูลพื้นฐานของการสอบ</h4>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">เลือก <strong>รหัสวิชา</strong> จาก Dropdown ที่แสดงเฉพาะวิชาที่ได้รับมอบหมายจากผู้ดูแลระบบ</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอก <strong>ชื่อการสอบ/หัวข้อ</strong> เช่น "สอบกลางภาคเทอม 1/2568"</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">เลือก <strong>ชุดข้อสอบ (Set)</strong>: ชุด A, B, C หรือไม่ระบุ (ใช้เมื่อมีหลายชุด)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">กรอก <strong>กลุ่มเรียน (Section)</strong> และ <strong>ห้องสอบ (Room)</strong> ตามความเหมาะสม</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">5</div>
+    <div class="step-content">ระบบจะสร้าง <strong>รหัส PIN 6 หลัก</strong> ให้อัตโนมัติ สามารถกดปุ่ม 🔄 เพื่อสร้างใหม่ได้ PIN นี้จะใช้เป็นรหัสสำหรับนักศึกษาเข้าห้องสอบ</div>
+  </div>
+
+  <h4 class="step-title">ส่วนที่ 2 – การตั้งค่าเวลาและเงื่อนไขการสอบ</h4>
+  <div class="step-block">
+    <div class="step-num">6</div>
+    <div class="step-content">เลือก <strong>รูปแบบการกำหนดเวลาสอบ</strong>:<br>
+      • <strong>แบบกำหนดช่วงเวลา:</strong> ระบุวันที่-เวลาเริ่มต้นและสิ้นสุด (เหมาะสำหรับสอบในห้อง)<br>
+      • <strong>แบบกำหนดระยะเวลาอิสระ:</strong> ระบุจำนวนนาที (นับจากที่นักศึกษาเริ่มทำ)
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">7</div>
+    <div class="step-content">เลือก <strong>สลับลำดับข้อสอบ (Shuffle)</strong> เปิด/ปิดได้ตามต้องการ เพื่อป้องกันการลอกกัน</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">8</div>
+    <div class="step-content">กรอก <strong>คำชี้แจง/กฎการสอบ</strong> เช่น "ห้ามใช้เครื่องคิดเลข ทุจริตปรับตกทันที"</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">9</div>
+    <div class="step-content">คลิกปุ่ม <strong>"บันทึกและสร้างชุดข้อสอบ"</strong> ระบบจะสร้างชุดข้อสอบและแนะนำให้ไปยังหน้าจัดการโจทย์</div>
+  </div>
+
+  <div class="note-box info">
+    <strong>ℹ️ หมายเหตุ:</strong> การสร้างชุดข้อสอบเป็นเพียงการสร้าง "กรอบ" ของการสอบ อาจารย์จะต้องไปเพิ่มโจทย์ข้อสอบในขั้นตอนถัดไปที่หน้า "จัดการโจทย์และคลังข้อสอบ"
+  </div>
+
+  <div class="note-box danger" style="margin-top:3mm;">
+    <strong>⚠️ ข้อควรระวัง:</strong> ไม่สามารถตั้งเวลาเริ่มต้นย้อนหลังได้ และเวลาสิ้นสุดต้องอยู่หลังเวลาเริ่มต้นเสมอ ระบบจะแจ้งเตือนหากกรอกข้อมูลไม่ถูกต้อง
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-9</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 10 – จัดการโจทย์
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">4.3 การจัดการโจทย์และคลังข้อสอบ (Manage Questions)</h2>
+  <p>หน้านี้ใช้สำหรับจัดการโจทย์ทั้งหมดในชุดข้อสอบที่เลือก ระบบแบ่งออกเป็น 2 ส่วนหลัก คือ ฟอร์มสร้างโจทย์ใหม่ด้านซ้าย และรายการโจทย์ในชุดข้อสอบด้านขวา</p>
+
+  <div class="figure-box">
+    <div class="icon">📋</div>
+    <strong>ภาพที่ ก.7</strong> หน้าจัดการโจทย์ข้อสอบ (Manage Questions)<br>
+    <small style="margin-top:2mm;">[แสดงฟอร์มสร้างโจทย์ด้านซ้าย และรายการโจทย์พร้อมปุ่มแก้ไข/ลบด้านขวา]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.7 หน้าจัดการโจทย์ข้อสอบ</p>
+
+  <h3 class="sub-title">4.3.1 การสร้างโจทย์ใหม่</h3>
+  <p>ระบบรองรับโจทย์ข้อสอบ 3 ประเภท</p>
+  <table class="overview-table">
+    <thead>
+      <tr><th>ประเภท</th><th>รายละเอียด</th><th>การตรวจ</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ปรนัย</strong><br>(Multiple Choice)</td>
+        <td>มี 4 ตัวเลือก (A, B, C, D) ระบุเฉลยที่ถูกต้อง 1 ข้อ</td>
+        <td>ตรวจอัตโนมัติ 100%</td>
+      </tr>
+      <tr>
+        <td><strong>ถูก-ผิด</strong><br>(True/False)</td>
+        <td>นักศึกษาเลือกว่าข้อความนั้นถูกหรือผิด</td>
+        <td>ตรวจอัตโนมัติ 100%</td>
+      </tr>
+      <tr>
+        <td><strong>อัตนัย</strong><br>(Subjective)</td>
+        <td>นักศึกษาพิมพ์คำตอบอิสระ อาจารย์กรอกแนวคำตอบอ้างอิง</td>
+        <td>ตรวจโดยอาจารย์</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="step-block" style="margin-top:3mm;">
+    <div class="step-num">1</div>
+    <div class="step-content">กรอก <strong>หมวดหมู่/บทเรียน</strong> (เช่น "บทที่ 3") และเลือก <strong>ระดับความยาก</strong> (ง่าย/ปานกลาง/ยาก)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">เลือก <strong>รูปแบบโจทย์</strong> ฟอร์มจะเปลี่ยนให้ตรงกับประเภทที่เลือก</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">กรอก <strong>คะแนน</strong> ของข้อนั้น (รองรับทศนิยม เช่น 0.5, 1.25)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">กรอกข้อความโจทย์ ตัวเลือก และเลือกเฉลย แล้วคลิก <strong>"บันทึกโจทย์"</strong></div>
+  </div>
+
+  <h3 class="sub-title">4.3.2 การดึงโจทย์จากคลังข้อสอบ</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">คลิกปุ่ม <strong>"ดึงโจทย์จากคลังข้อสอบ"</strong> (สีเขียว) หน้าต่าง Modal จะแสดงโจทย์จากคลังที่เกี่ยวข้องกับรายวิชานี้</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">ใช้ฟีเจอร์ <strong>"ดึงโจทย์แบบระบุจำนวน (Bulk/สุ่มเป็นกลุ่ม)"</strong> โดยกรอกจำนวนที่ต้องการ เลือกระดับความยาก และคะแนนต่อข้อ แล้วกด <strong>"สุ่มดึง"</strong></div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">หรือเลือกดึงทีละข้อโดยคลิกปุ่ม <strong>"+ ดึงมาใช้"</strong> ข้างโจทย์ที่ต้องการ</div>
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-10</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 11 – AI Generator
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">4.4 การสร้างข้อสอบด้วย AI (AI Generator)</h2>
+  <p>ฟีเจอร์ที่โดดเด่นที่สุดของระบบ Smart Exam คือความสามารถในการสร้างข้อสอบอัตโนมัติโดยใช้ Google Gemini AI ซึ่งสามารถวิเคราะห์เนื้อหาจากไฟล์ PDF หรือข้อความที่อาจารย์ป้อน แล้วสร้างชุดข้อสอบปรนัยภาษาไทยที่พร้อมใช้งานได้ทันที</p>
+
+  <div class="figure-box">
+    <div class="icon">🤖</div>
+    <strong>ภาพที่ ก.8</strong> หน้า AI Generator<br>
+    <small style="margin-top:2mm;">[แสดงฟอร์มเลือกชุดข้อสอบ, จำนวนข้อ, ระดับความยาก, คำสั่งพิเศษ, Upload PDF]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.8 หน้าสร้างข้อสอบด้วย AI</p>
+
+  <h3 class="sub-title">4.4.1 ขั้นตอนการสร้างข้อสอบด้วย AI (STEP 1 – กรอกข้อมูล)</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">เลือก <strong>ชุดข้อสอบปลายทาง</strong> จาก Dropdown ที่ต้องการให้ AI สร้างโจทย์ใส่ (ต้องสร้างชุดข้อสอบไว้ก่อนแล้ว)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอก <strong>จำนวนข้อ</strong> ที่ต้องการ (1–50 ข้อ)</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">เลือก <strong>ระดับความยาก</strong>:<br>
+      • <strong>ง่าย (ความจำ):</strong> ถามตรงจากเนื้อหา<br>
+      • <strong>ปานกลาง (ประยุกต์):</strong> ต้องการความเข้าใจ<br>
+      • <strong>ยาก (วิเคราะห์):</strong> ต้องคิดวิเคราะห์ซับซ้อน
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">กรอก <strong>คำสั่งเพิ่มเติมให้ AI</strong> (ไม่บังคับ) เช่น "เน้นออกสอบเรื่องระบบฐานข้อมูล, ไม่เอาโจทย์คำนวณ"</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">5</div>
+    <div class="step-content"><strong>เลือกแหล่งเนื้อหา (เลือกอย่างใดอย่างหนึ่ง):</strong><br>
+      • <strong>อัปโหลดไฟล์ PDF:</strong> คลิก "เลือกไฟล์" และเลือก PDF สื่อการสอน<br>
+      • <strong>วางเนื้อหาข้อความ:</strong> คัดลอกข้อความลงในกล่อง Textarea
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">6</div>
+    <div class="step-content">คลิกปุ่ม <strong>"เริ่มวิเคราะห์และสร้างข้อสอบ (AI)"</strong> ระบบจะแสดง Loading Screen ระหว่างประมวลผล (ใช้เวลาประมาณ 10–30 วินาที)</div>
+  </div>
+
+  <h3 class="sub-title">4.4.2 การตรวจสอบและปรับแก้ (STEP 2 – Preview)</h3>
+  <div class="step-block">
+    <div class="step-num">7</div>
+    <div class="step-content">เมื่อ AI สร้างข้อสอบสำเร็จ หน้า Preview จะแสดงโจทย์ทั้งหมด อาจารย์สามารถ <strong>แก้ไขโจทย์ ตัวเลือก และเฉลย</strong> โดยตรงในหน้านี้ได้</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">8</div>
+    <div class="step-content">หากต้องการให้ AI ปรับแก้ ให้พิมพ์คำสั่งในช่อง <strong>"สั่ง AI ปรับปรุงข้อสอบชุดนี้"</strong> เช่น "ขอให้ข้อ 1-3 ยากขึ้น" แล้วคลิก <strong>"ให้ AI ปรับปรุงใหม่"</strong></div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">9</div>
+    <div class="step-content">เมื่อพอใจแล้ว คลิกปุ่ม <strong>"ยืนยันข้อมูลและบันทึกลงระบบ"</strong> โจทย์จะถูกบันทึกเข้าสู่ชุดข้อสอบที่เลือกไว้</div>
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-11</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 12 – ผลการสอบ + ตรวจอัตนัย
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">4.5 การดูผลการสอบและตรวจข้อสอบอัตนัย</h2>
+
+  <h3 class="sub-title">4.5.1 การดูผลการสอบ (Exam Results)</h3>
+  <p>จากหน้าคลังข้อสอบ คลิกที่ชุดข้อสอบที่ต้องการ จากนั้นคลิกปุ่ม <strong>"ดูผลการสอบ"</strong> ระบบจะแสดงหน้าสรุปผลการสอบพร้อมสถิติ</p>
+
+  <div class="figure-box" style="min-height:35mm;">
+    <div class="icon">📊</div>
+    <strong>ภาพที่ ก.9</strong> หน้าผลการสอบ (Exam Results)<br>
+    <small style="margin-top:2mm;">[แสดงการ์ดสถิติ: จำนวนผู้ส่ง, คะแนนเต็ม, คะแนนเฉลี่ย, คะแนนสูงสุด + ตารางรายชื่อนักศึกษา]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.9 หน้าแสดงผลการสอบ</p>
+
+  <p class="no-indent">สถิติที่แสดงบนหน้าผลการสอบ ได้แก่</p>
+  <ul>
+    <li><strong>จำนวนผู้ส่งข้อสอบ</strong> (Total Students)</li>
+    <li><strong>คะแนนเต็ม</strong> (Max Points) ของชุดข้อสอบนั้น</li>
+    <li><strong>คะแนนเฉลี่ย</strong> (Mean Score) ของทั้งห้อง</li>
+    <li><strong>คะแนนสูงสุด</strong> (Highest Score) ที่มีนักศึกษาได้รับ</li>
+  </ul>
+  <p>ตารางด้านล่างแสดงรายชื่อนักศึกษาทุกคนพร้อมคะแนนและสถานะการตรวจ ("<strong>รอตรวจอัตนัย</strong>" สีเหลือง หรือ "<strong>ตรวจเสร็จสิ้น</strong>" สีเขียว)</p>
+
+  <h3 class="sub-title">4.5.2 การตรวจข้อสอบอัตนัย (Grade Student)</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">ในตารางรายชื่อ คลิกปุ่ม <strong>"ดูคำตอบ/ให้คะแนน"</strong> ของนักศึกษาที่ต้องการตรวจ</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">หน้าตรวจข้อสอบจะแสดงโจทย์ทุกข้อพร้อมคำตอบของนักศึกษา สำหรับข้อปรนัยและถูก-ผิดจะแสดงผลตรวจอัตโนมัติ สีเขียว = ถูก, สีแดง = ผิด</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">สำหรับ <strong>ข้อสอบอัตนัย</strong> อาจารย์จะเห็นคำตอบของนักศึกษาและแนวคำตอบอ้างอิง ให้กรอกคะแนนที่ต้องการให้ในช่องที่กำหนด</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">คลิกปุ่ม <strong>"บันทึกคะแนน"</strong> ระบบจะอัปเดตคะแนนรวมของนักศึกษาทันที</div>
+  </div>
+
+  <div class="note-box success">
+    <strong>✅ หมายเหตุ:</strong> คะแนนสุทธิที่แสดงในตาราง <strong>จะอัปเดตอัตโนมัติ</strong> เมื่ออาจารย์ให้คะแนนข้ออัตนัยครบทุกข้อ สถานะจะเปลี่ยนจาก "รอตรวจ" เป็น "ตรวจเสร็จสิ้น"
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-12</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 13 – Item Analysis
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">4.6 การวิเคราะห์คุณภาพข้อสอบ (Item Analysis)</h2>
+  <p>ระบบมีฟีเจอร์วิเคราะห์คุณภาพข้อสอบทางสถิติโดยอัตโนมัติ ซึ่งช่วยให้อาจารย์ทราบว่าข้อสอบข้อใดมีคุณภาพดีหรือควรปรับปรุง</p>
+
+  <div class="figure-box">
+    <div class="icon">🔬</div>
+    <strong>ภาพที่ ก.10</strong> หน้าวิเคราะห์คุณภาพข้อสอบ (Item Analysis)<br>
+    <small style="margin-top:2mm;">[แสดงตาราง: ข้อที่, คำถาม, ตอบถูก, ค่าความยาก (p), ค่าอำนาจจำแนก (D), ข้อเสนอแนะ AI]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.10 หน้าวิเคราะห์คุณภาพข้อสอบเชิงสถิติ</p>
+
+  <p>การเข้าถึงหน้านี้ทำได้โดยคลิกปุ่ม <strong>"วิเคราะห์ข้อสอบ (Item Analysis)"</strong> จากหน้าผลการสอบ ระบบต้องการข้อมูลการสอบอย่างน้อย <strong>2 คน</strong> ขึ้นไป</p>
+
+  <h3 class="sub-title">ค่าสถิติที่ระบบวิเคราะห์</h3>
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th style="width:25%;">ค่าสถิติ</th>
+        <th>คำอธิบาย</th>
+        <th style="width:25%;">เกณฑ์การแปลผล</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ค่าความยาก (p)</strong></td>
+        <td>สัดส่วนผู้สอบที่ตอบข้อนั้นถูก (ยิ่งสูงยิ่งง่าย)</td>
+        <td>0.40–0.80 = ดีมาก<br>0.20–0.39 หรือ 0.81–1.00 = ใช้ได้<br>&lt;0.20 หรือ &gt;0.80 = ควรแก้ไข</td>
+      </tr>
+      <tr>
+        <td><strong>ค่าอำนาจจำแนก (D)</strong></td>
+        <td>ความสามารถของข้อสอบในการแยกผู้สอบกลุ่มเก่งออกจากกลุ่มอ่อน</td>
+        <td>≥0.40 = ดีมาก<br>0.20–0.39 = พอใช้<br>&lt;0.20 = ต่ำ ควรแก้ไข<br>&lt;0 = มีปัญหา</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">ข้อเสนอแนะจากระบบ AI</h3>
+  <p>คอลัมน์สุดท้ายในตารางจะแสดงข้อเสนอแนะอัตโนมัติ ได้แก่</p>
+  <ul>
+    <li><span style="color:#198754; font-weight:700;">✅ "ดีมาก ข้อสอบมีคุณภาพ"</span> – ข้อสอบมาตรฐาน ใช้งานได้ดี</li>
+    <li><span style="color:#0d6efd; font-weight:700;">ℹ️ "ใช้งานได้"</span> – ข้อสอบยอมรับได้ แต่อาจปรับปรุง</li>
+    <li><span style="color:#dc3545; font-weight:700;">⚠️ "ควรปรับให้ยากขึ้นหรือตัดทิ้ง"</span> – ข้อสอบง่ายเกินไป</li>
+    <li><span style="color:#dc3545; font-weight:700;">❌ "ข้อสอบมีปัญหา ตรวจสอบเฉลย"</span> – ค่า D ติดลบ แสดงว่าเฉลยอาจผิด</li>
+  </ul>
+
+  <div class="note-box info">
+    <strong>ℹ️ หมายเหตุ:</strong> Item Analysis วิเคราะห์เฉพาะข้อสอบประเภท <strong>ปรนัย</strong> และ <strong>ถูก-ผิด</strong> เท่านั้น ไม่รวมข้ออัตนัย เนื่องจากการวิเคราะห์ทางสถิติแบบ Dichotomous ไม่สามารถใช้กับคะแนนต่อเนื่องได้
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-13</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 14 – Student Dashboard
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h1 class="chapter-title">5. คู่มือสำหรับนักศึกษา (Student)</h1>
+
+  <h2 class="section-title">5.1 แดชบอร์ดนักศึกษา</h2>
+  <p>เมื่อเข้าสู่ระบบในฐานะนักศึกษา จะพบหน้าแดชบอร์ดที่ออกแบบมาเน้นการใช้งานที่รวดเร็วและเข้าใจง่าย</p>
+
+  <div class="figure-box">
+    <div class="icon">🎒</div>
+    <strong>ภาพที่ ก.11</strong> แดชบอร์ดนักศึกษา (Student Dashboard)<br>
+    <small style="margin-top:2mm;">[แสดงช่อง PIN ขนาดใหญ่, การ์ดจำนวนวิชาที่สอบ, คะแนนเฉลี่ย, กราฟพัฒนาการ, ประวัติการสอบล่าสุด]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.11 หน้าแดชบอร์ดของนักศึกษา</p>
+
+  <p class="no-indent">แดชบอร์ดนักศึกษาประกอบด้วยองค์ประกอบหลัก ดังนี้</p>
+  <ul>
+    <li><strong>ช่องกรอกรหัส PIN:</strong> สำหรับเข้าห้องสอบอย่างรวดเร็วโดยไม่ต้องค้นหา</li>
+    <li><strong>จำนวนวิชาที่สอบแล้ว:</strong> แสดงจำนวนครั้งที่ส่งข้อสอบแล้วทั้งหมด</li>
+    <li><strong>คะแนนเฉลี่ยรวม (%):</strong> คะแนนเฉลี่ยจากทุกวิชาที่เคยสอบ</li>
+    <li><strong>กราฟพัฒนาการคะแนน:</strong> Line Chart แสดงความก้าวหน้า 5 การสอบล่าสุด (แกน Y เป็น %)</li>
+    <li><strong>ประวัติการสอบล่าสุด:</strong> ตารางแสดง 5 รายการล่าสุดพร้อมคะแนน</li>
+  </ul>
+
+  <div class="note-box danger">
+    <strong>⚠️ สัญลักษณ์ "ถูกเพ่งเล็ง":</strong> หากระบบตรวจพบพฤติกรรมที่น่าสงสัย (เช่น เวลาทำข้อสอบสั้นผิดปกติ) จะแสดงป้าย <span style="background:#dc3545; color:#fff; padding:1px 5px; border-radius:3px; font-size:13pt;">ถูกเพ่งเล็ง</span> ในประวัติการสอบ ซึ่งอาจารย์จะได้รับการแจ้งเตือน
+  </div>
+
+  <h2 class="section-title">5.2 การเข้าห้องสอบด้วยรหัส PIN</h2>
+  <p>นักศึกษาสามารถเข้าห้องสอบได้ 2 วิธี</p>
+
+  <h3 class="sub-title">วิธีที่ 1 – กรอก PIN จากแดชบอร์ด (แนะนำ)</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">รับ <strong>รหัส PIN 6 หลัก</strong> จากอาจารย์ผู้ควบคุมการสอบ</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอกรหัส PIN ในช่อง <strong>"รหัส PIN 6 หลัก"</strong> บนแดชบอร์ด แล้วคลิก <strong>"เริ่มทำข้อสอบ"</strong></div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">ระบบจะตรวจสอบ PIN และนำไปยังหน้าทำข้อสอบ หากยังไม่ถึงเวลาสอบจะแจ้งเตือนเวลาที่จะเปิดสอบ</div>
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-14</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 15 – ทำข้อสอบ
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">5.3 การทำข้อสอบ (Take Exam)</h2>
+  <p>หน้าทำข้อสอบออกแบบให้ใช้งานง่าย มีระบบจับเวลาแบบ Real-time และบันทึกคำตอบอัตโนมัติ</p>
+
+  <div class="figure-box">
+    <div class="icon">⏰</div>
+    <strong>ภาพที่ ก.12</strong> หน้าทำข้อสอบ (Take Exam)<br>
+    <small style="margin-top:2mm;">[แสดง Navbar มีนาฬิกาจับเวลา, กล่องคำชี้แจง, โจทย์ทีละข้อพร้อมตัวเลือก Radio/Checkbox, ปุ่มส่งข้อสอบ]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.12 หน้าทำข้อสอบออนไลน์</p>
+
+  <h3 class="sub-title">ส่วนประกอบของหน้าทำข้อสอบ</h3>
+  <ul>
+    <li><strong>นาฬิกาจับเวลา:</strong> แสดงเวลาคงเหลือบนมุมบนขวา (รูปแบบ ชม:นาที:วินาที) จะเปลี่ยนสีแดงสว่างเมื่อเหลือน้อยกว่า 5 นาที</li>
+    <li><strong>คำชี้แจง:</strong> แสดงกฎและคำชี้แจงการสอบที่อาจารย์กำหนด</li>
+    <li><strong>โจทย์:</strong> แสดงทีละข้อพร้อมจำนวนคะแนนของแต่ละข้อ</li>
+    <li><strong>การบันทึกคำตอบ:</strong> คำตอบถูกบันทึกใน Local Storage อัตโนมัติทุกครั้งที่มีการเลือก ป้องกันการสูญหายหากหน้าเว็บรีเฟรช</li>
+  </ul>
+
+  <h3 class="sub-title">ขั้นตอนการทำข้อสอบ</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">อ่านคำชี้แจงและกฎการสอบให้ครบถ้วนก่อนเริ่มทำ</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">ตอบข้อสอบแต่ละข้อ:<br>
+      • <strong>ปรนัย:</strong> คลิกวงกลม (Radio Button) หน้าตัวเลือกที่ต้องการ<br>
+      • <strong>ถูก-ผิด:</strong> คลิกเลือก "ถูก (True)" หรือ "ผิด (False)"<br>
+      • <strong>อัตนัย:</strong> พิมพ์คำตอบในกล่องข้อความ
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">ตรวจสอบคำตอบให้ครบถ้วนก่อนส่ง เมื่อพร้อมแล้วคลิกปุ่ม <strong>"ส่งข้อสอบ"</strong> ที่ด้านล่างสุด</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-content">กล่องยืนยันจะปรากฏถามว่า "คุณตรวจสอบคำตอบครบถ้วนแล้ว และยืนยันการส่งข้อสอบใช่หรือไม่?" คลิก <strong>"ตกลง"</strong> เพื่อยืนยัน</div>
+  </div>
+
+  <div class="note-box danger">
+    <strong>⚠️ สำคัญมาก:</strong> เมื่อหมดเวลา ระบบจะ <strong>ส่งข้อสอบอัตโนมัติทันที</strong> ไม่ว่าจะตอบครบหรือไม่ก็ตาม และ <strong>ไม่สามารถทำข้อสอบชุดเดิมซ้ำได้</strong> เมื่อส่งแล้ว
+  </div>
+
+  <div class="note-box info" style="margin-top:3mm;">
+    <strong>ℹ️ ระบบป้องกันการสูญหายของคำตอบ:</strong> คำตอบจะถูกบันทึกอัตโนมัติใน Browser ทุกครั้งที่คลิกเลือก หากหน้าเว็บรีเฟรชโดยไม่ตั้งใจ คำตอบที่เลือกไว้จะถูกกู้คืนอัตโนมัติ อย่างไรก็ตามนาฬิกาจับเวลาจะนับต่อเนื่องจากที่ค้างไว้
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-15</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     PAGE 16 – ผลการสอบนักศึกษา
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h2 class="section-title">5.4 การดูผลการสอบของตนเอง (My Results)</h2>
+  <p>นักศึกษาสามารถดูประวัติและผลการสอบของตนเองได้ที่เมนู <strong>"ผลการสอบของฉัน"</strong> ในแถบเมนูด้านซ้าย</p>
+
+  <div class="figure-box">
+    <div class="icon">📈</div>
+    <strong>ภาพที่ ก.13</strong> หน้าผลการสอบของนักศึกษา (My Results)<br>
+    <small style="margin-top:2mm;">[แสดงตารางประวัติการสอบทั้งหมด พร้อมรหัสวิชา, ชื่อข้อสอบ, คะแนน, วันที่, ปุ่มดูรายละเอียด]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.13 หน้าดูผลการสอบทั้งหมดของนักศึกษา</p>
+
+  <p class="no-indent">ข้อมูลที่แสดงในหน้าผลการสอบ ได้แก่</p>
+  <ul>
+    <li>รหัสวิชาและชื่อข้อสอบ</li>
+    <li>คะแนนที่ได้รับเทียบกับคะแนนเต็ม</li>
+    <li>วันที่และเวลาที่ส่งข้อสอบ</li>
+    <li>ปุ่ม <strong>"ดูรายละเอียด"</strong> เพื่อดูคำตอบที่เลือกในแต่ละข้อ (สีเขียว = ถูก, สีแดง = ผิด)</li>
+  </ul>
+
+  <div class="note-box info">
+    <strong>ℹ️ หมายเหตุ:</strong> คะแนนของข้อสอบอัตนัยจะยังไม่สมบูรณ์จนกว่าอาจารย์จะตรวจและให้คะแนนแล้ว นักศึกษาสามารถกลับมาตรวจสอบคะแนนได้หลังจากอาจารย์ตรวจเสร็จแล้ว
+  </div>
+
+  <hr class="divider">
+
+  <h1 class="chapter-title" style="margin-top:6mm;">6. การจัดการโปรไฟล์ส่วนตัว</h1>
+  <p>ผู้ใช้ทุกบทบาทสามารถแก้ไขข้อมูลส่วนตัวและเปลี่ยนรหัสผ่านได้โดยคลิกที่ <strong>รูปโปรไฟล์</strong> หรือชื่อผู้ใช้ที่แถบบนขวา แล้วเลือก <strong>"โปรไฟล์"</strong></p>
+
+  <div class="figure-box" style="min-height:30mm;">
+    <div class="icon">👤</div>
+    <strong>ภาพที่ ก.14</strong> หน้าจัดการโปรไฟล์ส่วนตัว<br>
+    <small style="margin-top:2mm;">[แสดง 2 ส่วน: แก้ไขข้อมูลทั่วไป ด้านซ้าย และ เปลี่ยนรหัสผ่าน ด้านขวา]</small>
+  </div>
+  <p class="figure-caption">ภาพที่ ก.14 หน้าโปรไฟล์ส่วนตัว</p>
+
+  <h3 class="sub-title">6.1 การแก้ไขข้อมูลส่วนตัว</h3>
+  <ul>
+    <li>แก้ไขได้: <strong>ชื่อ-นามสกุล, คณะ, สาขาวิชา</strong> (และชั้นปีสำหรับนักศึกษา)</li>
+    <li>แก้ไขไม่ได้: <strong>Username</strong> และ <strong>รหัสนักศึกษา</strong> (ต้องให้ผู้ดูแลระบบแก้ไข)</li>
+  </ul>
+
+  <h3 class="sub-title">6.2 การเปลี่ยนรหัสผ่าน</h3>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-content">กรอก <strong>รหัสผ่านเดิม</strong> เพื่อยืนยันตัวตน</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-content">กรอก <strong>รหัสผ่านใหม่</strong> (อย่างน้อย 6 ตัวอักษร) และ <strong>ยืนยันรหัสผ่านใหม่</strong> อีกครั้ง</div>
+  </div>
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-content">คลิกปุ่ม <strong>"อัปเดตรหัสผ่าน"</strong> ระบบจะแจ้งเตือนหากรหัสผ่านใหม่และการยืนยันไม่ตรงกัน</div>
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-16</span>
+  </div>
+</div>
+
+<!-- =====================================================
+     LAST PAGE – Summary & Notes
+     ===================================================== -->
+<div class="page">
+  <div class="page-header">ภาคผนวก ก – คู่มือการใช้งานระบบ Smart Exam</div>
+
+  <h1 class="chapter-title">สรุปฟีเจอร์หลักของระบบ Smart Exam</h1>
+
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th style="width:22%;">ฟีเจอร์</th>
+        <th>รายละเอียด</th>
+        <th style="width:20%;">ผู้ใช้</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>สร้างข้อสอบด้วย AI</strong></td>
+        <td>วิเคราะห์ PDF/ข้อความและสร้างโจทย์ปรนัยภาษาไทยอัตโนมัติ พร้อมตรวจสอบและปรับแก้ผ่าน AI</td>
+        <td><span class="role-badge role-teacher">Teacher</span> <span class="role-badge role-admin">Admin</span></td>
+      </tr>
+      <tr>
+        <td><strong>ระบบ PIN เข้าสอบ</strong></td>
+        <td>ใช้รหัส PIN 6 หลักแทนการค้นหาข้อสอบ สะดวกและรวดเร็ว</td>
+        <td><span class="role-badge role-student">Student</span></td>
+      </tr>
+      <tr>
+        <td><strong>จับเวลาอัตโนมัติ</strong></td>
+        <td>จับเวลาแบบ Real-time ส่งข้อสอบอัตโนมัติเมื่อหมดเวลา ป้องกันการรีเฟรชหลอก</td>
+        <td><span class="role-badge role-student">Student</span></td>
+      </tr>
+      <tr>
+        <td><strong>ตรวจอัตโนมัติ</strong></td>
+        <td>ตรวจข้อปรนัยและถูก-ผิดทันที อาจารย์ตรวจข้ออัตนัยเอง</td>
+        <td><span class="role-badge role-teacher">Teacher</span></td>
+      </tr>
+      <tr>
+        <td><strong>Item Analysis</strong></td>
+        <td>คำนวณค่า p (ความยาก) และค่า D (อำนาจจำแนก) เพื่อประเมินคุณภาพข้อสอบ</td>
+        <td><span class="role-badge role-teacher">Teacher</span></td>
+      </tr>
+      <tr>
+        <td><strong>Import/Export CSV</strong></td>
+        <td>นำเข้าข้อมูลผู้ใช้ รายวิชา และโจทย์ข้อสอบผ่านไฟล์ CSV จำนวนมากได้ครั้งเดียว</td>
+        <td><span class="role-badge role-admin">Admin</span> <span class="role-badge role-teacher">Teacher</span></td>
+      </tr>
+      <tr>
+        <td><strong>กราฟสถิติ</strong></td>
+        <td>Line/Bar Chart แสดงพัฒนาการและสถิติคะแนนแบบ Real-time</td>
+        <td>ทุกบทบาท</td>
+      </tr>
+      <tr>
+        <td><strong>ระบบแจ้งเตือนทุจริต</strong></td>
+        <td>ระบบตรวจสอบพฤติกรรมน่าสงสัยและแจ้งเตือนอาจารย์/ผู้ดูแล</td>
+        <td><span class="role-badge role-admin">Admin</span> <span class="role-badge role-teacher">Teacher</span></td>
+      </tr>
+      <tr>
+        <td><strong>Reset Password</strong></td>
+        <td>ผู้ดูแลระบบสามารถสุ่มรหัสผ่านใหม่ 8 หลักให้ผู้ใช้ผ่าน Ajax โดยไม่ต้อง Reload หน้า</td>
+        <td><span class="role-badge role-admin">Admin</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box success" style="margin-top:6mm;">
+    <strong>✅ หากพบปัญหาในการใช้งาน:</strong> ให้ติดต่อผู้ดูแลระบบเพื่อขอความช่วยเหลือ สำหรับปัญหาเรื่องรหัสผ่านผู้ดูแลระบบสามารถ Reset Password ให้ได้ทันที และสำหรับปัญหาทางเทคนิคควรแจ้งให้ระบุชื่อผู้ใช้งาน วันเวลา และรายละเอียดปัญหาให้ชัดเจน
+  </div>
+
+  <div style="text-align:center; margin-top:15mm; font-size:14pt; color:#666; border-top:1px solid #ddd; padding-top:5mm;">
+    — จบภาคผนวก ก คู่มือการใช้งานระบบ Smart Exam —
+  </div>
+
+  <div class="page-footer">
+    <span>ระบบ Smart Exam</span>
+    <span>ก-17</span>
+  </div>
+</div>
+
+</body>
+</html>
